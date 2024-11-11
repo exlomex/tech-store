@@ -4,6 +4,7 @@ import {ReactComponent as RightUpArrow} from "@/assets/arrowRightUpIcon.svg";
 import {ReactComponent as Search} from "@/assets/searchIcon.svg";
 import {Link} from "react-router-dom";
 import {useEffect} from "react";
+import {classNames} from "@/lib/classNames";
 
 interface DropDownProps {
     className?: string;
@@ -14,7 +15,7 @@ export const DropDownList = (props: DropDownProps) => {
     const { className, items} = props;
 
     return (
-        <div className={cls.DropDownList}>
+        <div className={classNames(cls.DropDownList, {}, [className])}>
             {
                 !items?.length
                     ? <p className={cls.noContent}>По вашему запросу ничего не найдено</p>

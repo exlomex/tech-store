@@ -6,7 +6,6 @@ import {ReactComponent as CatalogSvg} from '@/assets/catalogIcon.svg'
 import {ReactComponent as CardSvg} from '@/assets/cardIcon.svg'
 import {ReactComponent as ProfileSvg} from '@/assets/profileIcon.svg'
 import {SearchGood} from "@/components/SearchGood";
-import {lazy, useEffect, useState} from "react";
 
 interface HeaderProps {
     className?: string;
