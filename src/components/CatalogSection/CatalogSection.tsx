@@ -8,7 +8,8 @@ import SpeakerImage from '@/assets/categories/speakerCategoryIcon.png'
 import TabletImage from '@/assets/categories/tabletCategoryIcon.png'
 import {MainContainer} from "@/components/MainContainer";
 import {Link} from "react-router-dom";
-import React, {useRef} from "react";
+import React, {useEffect, useRef} from "react";
+import {usePreventOuterScroll} from "@/hooks/usePreventOuterScroll";
 
 interface CatalogSectionProps {
     className?: string;
@@ -35,11 +36,11 @@ export const CatalogSection = (props: CatalogSectionProps) => {
     const catalogRef = useRef<HTMLDivElement>(null)
 
     const onWheelScrollingHandler = (e: React.WheelEvent<HTMLDivElement>) => {
-        if (catalogRef.current) {
-            // @ts-ignore
-            catalogRef.current.scrollLeft += e.deltaY;
-        }
-    }
+        const target = e.currentTarget;
+        target.scrollLeft += e.deltaY;
+    };
+
+    usePreventOuterScroll(catalogRef);
 
     return (
             <section className={classNames(cls.CatalogSection, {}, [className])}>
@@ -52,8 +53,8 @@ export const CatalogSection = (props: CatalogSectionProps) => {
                             ref={catalogRef}
                             onWheel={onWheelScrollingHandler}
                         >
-                            {items.map(item => (
-                                <Link to={item.path} className={cls.CategoryItemWrapper}>
+                            {items.map((item, index) => (
+                                <Link key={index} to={item.path} className={cls.CategoryItemWrapper}>
                                     <div className={cls.CategoryItemImageWrapper}>
                                         <img className={cls.CategoryItemImage} src={item.img} alt={`${item.title}`}/>
                                     </div>

@@ -1,5 +1,5 @@
 .CatalogSection {
-    margin-top: 40px;
+    margin-top: 110px;
 
     .CatalogSectionInner {
 
@@ -48,6 +48,7 @@
 
                     .CategoryItemImage {
                         transition: transform .2s ease-out;
+                        will-change: transform;
                     }
                 }
 

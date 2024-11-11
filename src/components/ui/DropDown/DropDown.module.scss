@@ -1,0 +1,42 @@
+.DropDown {
+    position: relative;
+
+    .DropDownWrapper {
+        position: absolute;
+        min-width: 200px;
+        background-color: transparent;
+        padding-top: 10px;
+        right: 0;
+        top: 44px;
+        z-index: 5000;
+        transition: opacity .2s ease-out, transform .2s ease-out, visibility .2s ease-out;
+
+        &:not(.MenuOpen) {
+            visibility: hidden;
+            transform: scale(0.8);
+            opacity: 0;
+        }
+
+        .DropDownInner {
+            padding: 13px 10px;
+            background-color: var(--white);
+            border: 1px solid var(--main-skeleton);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+
+            .DropDownItem {
+                cursor: pointer;
+                width: 100%;
+                padding: 7px 11px;
+                border-radius: 8px;
+                font-size: 0.833em;
+                font-weight: 400;
+                &:hover {
+                    background-color: var(--main-skeleton);
+                    color: var(--dark-grey);
+                }
+            }
+        }
+    }
+}

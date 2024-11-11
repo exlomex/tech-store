@@ -1,0 +1,18 @@
+.Modal {
+    position: relative;
+    z-index: 10000;
+
+    &[data-closed] {
+        .ModalInner {
+            opacity: 0
+        }
+    }
+
+    .ModalInner {
+        transition: opacity .2s ease-out;
+        background-color: rgba(58, 58, 58, 0.3);
+        position: fixed;
+        z-index: 10;
+        inset: 0;
+    }
+}

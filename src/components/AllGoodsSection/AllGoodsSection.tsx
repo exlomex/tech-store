@@ -30,7 +30,7 @@ export const AllGoodsSection = (props: AllGoodsSectionProps) => {
                                     <Skeleton height={'25vh'} width={'15vw'} border={'8px'}/>
                                 </HStack>
                             ) : (data && data.map(card => (
-                                <GoodCard id={card.id} inCard={false} title={card.title} price={card.price} image={card.image || ''}/>
+                                <GoodCard key={card.id} id={card.id} inCard={false} title={card.title} price={card.price} image={card.image || ''}/>
                             )))
                         }
                         </div>
