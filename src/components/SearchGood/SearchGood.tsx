@@ -70,14 +70,16 @@ export const SearchGood = (props: SearchGoodProps) => {
                         placeholder={'Поиск'} type="text" ref={inputRef}
                         onChange={onInputChange} value={queryValue}
                     />
-                    {searchIsFetching &&
-                        <div className={cls.loaderWrapper}>
-                            <span className={cls.loader}></span>
-                        </div>
-                    }
+
+                    {/*TODO DELETE*/}
+                    {/*{searchIsFetching &&*/}
+                    {/*    <div className={cls.loaderWrapper}>*/}
+                    {/*        <span className={cls.loader}></span>*/}
+                    {/*    </div>*/}
+                    {/*}*/}
 
                 </div>
-                {debouncedQueryValue && inputActive && !searchIsLoading && <DropDownList items={searchData}/>}
+                {debouncedQueryValue && inputActive && <DropDownList items={searchData} isLoading={searchIsFetching}/>}
             </div>
             <div ref={overlayRef} className={classNames(cls.Overlay, {[cls.Overlay_active]: inputActive}, [])}></div>
         </>

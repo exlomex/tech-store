@@ -1,0 +1,22 @@
+.Button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    width: 200px;
+    height: 44px;
+    background: var(--blue);
+    color: white;
+    transition: background-color .2s ease;
+
+    font-size: 0.778em;
+    font-weight: 500;
+
+    &:hover {
+        background-color: var(--light-blue);
+    }
+
+    &.FullWidthButton {
+        width: 100%;
+    }
+}

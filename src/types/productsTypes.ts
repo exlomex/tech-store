@@ -2,7 +2,7 @@
 
 type InMemory = 'M_32' | 'M_64' | 'M_128' | 'M_256' | 'M_512' | 'M_1024';
 type OperationMemory = 'M_2' | 'M_4' | 'M_8' | 'M_16';
-// TODO mb replace qualcomm
+// TODO replace qualcomm
 type ProcessorBrand = 'APPLE' | 'MEDIATEK' | 'QUALCOMm';
 type OperationSystem = 'IOS' | 'ANDROID';
 type ScreenResolution = 'FULL_HD' | 'TWO_K' | 'FOUR_K';

@@ -13,3 +13,4 @@ const extendedApi = rtkApi.injectEndpoints({
 })
 
 export const LazyFetchGoodsByString = extendedApi.useLazyFetchGoodsByStringQuery
+export const FetchGoodsByString = extendedApi.useFetchGoodsByStringQuery
