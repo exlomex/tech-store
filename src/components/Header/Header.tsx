@@ -7,7 +7,7 @@ import {ReactComponent as CardSvg} from '@/assets/cardIcon.svg'
 import {ReactComponent as ProfileSvg} from '@/assets/profileIcon.svg'
 import {SearchGood} from "@/components/SearchGood";
 import {DropDown, DropdownItem} from "@/components/ui/DropDown";
-import {useState} from "react";
+import {useMemo, useState} from "react";
 import {ReactComponent as LoginSvg} from "@/assets/loginIcon.svg";
 import {ReactComponent as RegisterIcon} from "@/assets/registerIcon.svg";
 
@@ -18,18 +18,19 @@ interface HeaderProps {
 export const Header = (props: HeaderProps) => {
     const { className } = props;
 
-    const NonAuthorizationItems: DropdownItem[] = [
+
+    const NonAuthorizationItems = useMemo((): DropdownItem[] => [
         {content: (
-            <div className={cls.ItemsDropDown}>
-                <div className={cls.ItemSvgWrapper}><LoginSvg width={"18px"}/></div>
-                <p>Авторизация</p>
-            </div>), to: '/auth'},
+                <div className={cls.ItemsDropDown}>
+                    <div className={cls.ItemSvgWrapper}><LoginSvg width={"18px"}/></div>
+                    <p>Авторизация</p>
+                </div>), to: '/auth'},
         {content: (
-            <div className={cls.ItemsDropDown}>
-                <div className={cls.ItemSvgWrapper}><RegisterIcon width={'20px'}/></div>
-                <p>Регистрация</p>
-            </div>), to: '/registration'},
-    ]
+                <div className={cls.ItemsDropDown}>
+                    <div className={cls.ItemSvgWrapper}><RegisterIcon width={'20px'}/></div>
+                    <p>Регистрация</p>
+                </div>), to: '/registration'},
+    ], [cls.ItemsDropDown, cls.ItemSvgWrapper]);
 
     const AuthorizationUserItems: DropdownItem[] = [
         {content: 'Выйти', to: '/logout'},
