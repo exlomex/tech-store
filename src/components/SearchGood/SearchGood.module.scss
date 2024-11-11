@@ -1,0 +1,93 @@
+.Overlay {
+    position: fixed;
+    visibility: hidden;
+    transition: all .2s ease-out;
+
+    &_active {
+        visibility: visible;
+        position: fixed;
+        inset: 0;
+        z-index: var(--search-overlay-index);
+
+        background-color: rgba(58, 58, 58, 0.3);
+    }
+
+}
+
+.SearchGood {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 750px;
+    background-color: var(--field);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 0 15px;
+    z-index: var(--search-main-index);
+    position: relative;
+
+    &.inputActive {
+        background-color: var(--white);
+    }
+
+    .Input_wrapper {
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        gap: 0 15px;
+
+        svg {
+            flex-shrink: 0;
+        }
+
+        .loaderWrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .loader {
+                width: 16px;
+                height: 16px;
+                border: 2px solid var(--grey);
+                border-bottom-color: transparent;
+                border-radius: 50%;
+                display: inline-block;
+                box-sizing: border-box;
+                animation: rotation 1s linear infinite;
+            }
+
+            @keyframes rotation {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+
+            @keyframes rotation {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        }
+    }
+
+    .Input {
+        min-width: 80px;
+        height: 30px;
+        font-size: 0.889em;
+        background-color: transparent;
+        border-radius: 8px;
+        width: 100%;
+
+        &.inputActive::placeholder {
+            color: var(--dark-grey);
+        }
+    }
+}

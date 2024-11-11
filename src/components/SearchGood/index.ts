@@ -1,0 +1,1 @@
+export {SearchGood} from './SearchGood'
