@@ -1,7 +1,6 @@
 .AllGoodsSection {
     margin-top: 40px;
     .AllGoodsInner {
-
         .AllGoodsTitle {
             font-size: 1.778em;
             font-weight: 500;
@@ -10,13 +9,12 @@
 
         .CardsWrapper {
             gap: 15px;
-            padding: 20px 0;
+            padding-top: 15px;
             display: flex;
             flex-wrap: wrap;
             align-items: flex-start;
             justify-content: flex-start;
 
-            border-bottom: 1px solid var(--grey);
             border-top: 1px solid var(--grey);
         }
     }

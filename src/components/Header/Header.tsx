@@ -1,4 +1,4 @@
-import { classNames } from '@/lib/classNames';
+import {classNames} from '@/lib/classNames';
 import cls from './Header.module.scss';
 import {MainContainer} from "@/components/MainContainer";
 import LogoIcon from '@/assets/shopLogoIcon.svg'
@@ -10,6 +10,12 @@ import {DropDown, DropdownItem} from "@/components/ui/DropDown";
 import {useMemo, useState} from "react";
 import {ReactComponent as LoginSvg} from "@/assets/loginIcon.svg";
 import {ReactComponent as RegisterIcon} from "@/assets/registerIcon.svg";
+import {useAppDispatch} from "@/hooks/useAppDispatch";
+import {UserSliceActions} from "@/store/reducers/UserSlice";
+import {UserModalType, UserRoles} from "@/store/reducers/UserSliceSchema";
+import {useSelector} from "react-redux";
+import {getUserRole} from "@/store/selectors/getUserValues";
+import {Link} from "react-router-dom";
 
 interface HeaderProps {
     className?: string;
@@ -17,29 +23,49 @@ interface HeaderProps {
 
 export const Header = (props: HeaderProps) => {
     const { className } = props;
-
+    const dispatch = useAppDispatch()
 
     const NonAuthorizationItems = useMemo((): DropdownItem[] => [
         {content: (
                 <div className={cls.ItemsDropDown}>
                     <div className={cls.ItemSvgWrapper}><LoginSvg width={"18px"}/></div>
                     <p>Авторизация</p>
-                </div>), to: '/auth'},
+                </div>), onClick: () => {
+                dispatch(UserSliceActions.setModalIsOpen(true))
+                dispatch(UserSliceActions.setModalType(UserModalType.AUTH_MODAL))
+            }},
         {content: (
                 <div className={cls.ItemsDropDown}>
                     <div className={cls.ItemSvgWrapper}><RegisterIcon width={'20px'}/></div>
                     <p>Регистрация</p>
-                </div>), to: '/registration'},
+                </div>), onClick: () => {
+                dispatch(UserSliceActions.setModalIsOpen(true))
+                dispatch(UserSliceActions.setModalType(UserModalType.REGISTER_MODAL))
+            }
+        }
     ], [cls.ItemsDropDown, cls.ItemSvgWrapper]);
 
     const AuthorizationUserItems: DropdownItem[] = [
-        {content: 'Выйти', to: '/logout'},
+        {content: 'Выйти', onClick: () => {
+                dispatch(UserSliceActions.logout())
+            }}
     ]
 
     const AuthorizationAdminItems: DropdownItem[] = [
         {content: 'Панель управления', to: '/admin'},
-        {content: 'Выйти', to: '/logout'},
+        {content: 'Выйти', onClick: () => {
+                dispatch(UserSliceActions.logout())
+            }},
     ]
+
+    const role = useSelector(getUserRole)
+    const currentItemByRole = (items: DropdownItem[][], currentRole: UserRoles) => {
+        switch (currentRole) {
+            case UserRoles.GUEST: return items[0]
+            case UserRoles.USER: return items[1]
+            case UserRoles.ADMIN: return items[2]
+        }
+    }
 
     const ProfileTrigger = () => (
         <a className={cls.nav_item}
@@ -69,11 +95,12 @@ export const Header = (props: HeaderProps) => {
                             <CardSvg/>
                             <p className={cls.nav_title}>Корзина</p>
                         </a>
-                        <DropDown items={NonAuthorizationItems} trigger={<ProfileTrigger/>}
-                                  isActive={isProfileDropDownActive}
-                                  onClose={setIsProfileDropDownActive}
+                        <DropDown
+                            items={currentItemByRole([NonAuthorizationItems, AuthorizationUserItems, AuthorizationAdminItems], role)}
+                            trigger={<ProfileTrigger/>}
+                            isActive={isProfileDropDownActive}
+                            onClose={setIsProfileDropDownActive}
                         />
-
                     </nav>
                 </div>
 

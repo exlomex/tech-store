@@ -1,0 +1,62 @@
+.Input {
+    background-color: var(--white);
+    padding: 0 18px;
+    color: var(--black);
+    border: 1px solid var(--grey);
+    font-size: 0.889em;
+    font-weight: 400;
+    border-radius: 8px;
+    min-width: 100px;
+    height: 47px;
+    width: 100%;
+
+    transition: background-color 0.2s ease-out, border 0.2s ease-out;
+
+    &::placeholder {
+        color: var(--grey);
+        font-weight: 400;
+        font-size: 0.889rem;
+    }
+
+    &:focus {
+        border-color: var(--dark-grey);
+    }
+
+    &:hover {
+        border-color: var(--dark-grey);
+    }
+}
+
+.InputWrapper {
+    position: relative;
+
+    svg {
+        position: absolute;
+
+        transform: translateY(-50%);
+        top: 50%;
+    }
+
+    .OpenEyeIcon  {
+        cursor: pointer;
+
+        svg {
+            right: 18px;
+        }
+    }
+
+    &.InputError {
+        .Input {
+            border: 1px solid var(--red);
+        }
+
+        .ErrorIcon svg {
+            right: 18px;
+        }
+
+        .OpenEyeIcon svg {
+            right: 50px;
+        }
+    }
+}
+

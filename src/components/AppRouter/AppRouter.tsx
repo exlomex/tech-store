@@ -1,15 +1,24 @@
-import { Route, Routes } from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
+import {MainPage} from "@/pages/MainPage";
+import {RequireAuth} from "@/components/RequireAuth";
+import {UserRoles} from "@/store/reducers/UserSliceSchema";
 
 export const AppRouter = () => (
         <Routes>
             <Route path="/" element={
-                <div>main</div>
+                <MainPage/>
             }/>
-            <Route path="/login" element={
-                <div>login</div>
+            <Route path="/admin" element={
+                <RequireAuth role={UserRoles.ADMIN}>
+                    <div>admin page</div>
+                </RequireAuth>
             }/>
-            <Route path="/register" element={
-                <div>register</div>
+            <Route path="/goods" element={
+                <div>goods by category page</div>
             }/>
+            <Route path="/goods/:id" element={
+                <div>good page</div>
+            }/>
+            {/*<Route path="*" element={<Navigate to="/404page" replace />}/>*/}
         </Routes>
 );

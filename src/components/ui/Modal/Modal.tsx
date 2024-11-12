@@ -1,6 +1,6 @@
 import { classNames } from '@/lib/classNames';
 import cls from './Modal.module.scss';
-import {Dialog} from "@headlessui/react";
+import {Dialog, DialogBackdrop, DialogPanel} from "@headlessui/react";
 import {ReactNode} from "react";
 
 interface ModalProps {
@@ -18,11 +18,15 @@ export const Modal = (props: ModalProps) => {
             className={classNames(cls.Modal, {}, [className])}
             open={isOpen}
             onClose={onClose}
-            transition as={'div'}
+            as={'div'}
         >
-            <div onClick={onClose} className={cls.ModalInner}>
-                {children}
-            </div>
+            <DialogBackdrop className={cls.ModalInner} transition onClick={onClose}>
+                <DialogPanel transition className={cls.ModalContent}>
+                    <div>
+                        {children}
+                    </div>
+                </DialogPanel>
+            </DialogBackdrop>
         </Dialog>
     )
 };

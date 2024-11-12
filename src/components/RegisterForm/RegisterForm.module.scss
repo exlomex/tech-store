@@ -1,0 +1,62 @@
+.RegisterForm {
+
+    .RegisterFormTitle {
+        font-size: 1.778em;
+        margin-bottom: 70px;
+        text-align: center;
+    }
+
+    .RegisterFormForma {
+        display: flex;
+        flex-direction: column;
+
+        max-width: 570px;
+        width: 60vw;
+
+        .InputWrapper {
+            margin-bottom: 10px;
+            height: 104px;
+
+            input {
+                margin-bottom: 1px;
+            }
+
+            .InputTitle {
+                display: block;
+                font-size: 1.333em;
+                margin-bottom: 12px;
+
+                span {
+                    color: var(--red);
+                }
+            }
+
+            .InputErrorText {
+                font-weight: 400;
+                font-size: 0.778rem;
+                color: var(--red);
+            }
+        }
+
+        .FormBottomBlock {
+            margin-top: 15px;
+
+            display: flex;
+            gap: 0 6px;
+            justify-content: center;
+
+            p {
+                font-size: 0.889em;
+            }
+
+            p:first-child {
+                font-weight: 400;
+                color: var(--light-grey);
+            }
+
+            p:last-child {
+                cursor: pointer;
+            }
+        }
+    }
+}
