@@ -22,15 +22,15 @@ export const RegisterForm = (props: RegisterFormProps) => {
         handleSubmit,
         trigger,
         formState: { errors },
-    } = useForm<HTMLInputElement>()
+    } = useForm<registerDataInputs>()
 
-    interface registerDataInterface {
+    interface registerDataInputs {
         registerFirstName: string;
         registerLastName: string
         registerUsername: string
         registerPassword: string
     }
-    const onSubmit: SubmitHandler<HTMLInputElement> = async (data: registerDataInterface) => {
+    const onSubmit: SubmitHandler<registerDataInputs> = (data) => {
         const registerData: registerServiceProps = {
             username: data.registerUsername,
             password: data.registerPassword,
@@ -38,7 +38,7 @@ export const RegisterForm = (props: RegisterFormProps) => {
             lastName: data.registerLastName
         }
 
-        await dispatch(registerService(registerData))
+        dispatch(registerService(registerData))
     }
 
     const registerFormFirstNameReg = register("registerFirstName", { required: true, onBlur: () => trigger('registerFirstName')})

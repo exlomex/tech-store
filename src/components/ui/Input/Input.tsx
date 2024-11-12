@@ -2,7 +2,7 @@ import React, {ForwardedRef, forwardRef, InputHTMLAttributes, useState} from 're
 import cls from './Input.module.scss';
 import {classNames} from "@/lib/classNames";
 import {
-    DeepRequired,
+    DeepRequired, FieldError,
     FieldErrorsImpl,
     GlobalError,
     UseFormRegisterReturn
@@ -30,7 +30,7 @@ interface InputProps extends HtmlInputProps {
     maxLength?: number;
     buttonType?: InputTypes;
     register: UseFormRegisterReturn<string>;
-    error: Partial<FieldErrorsImpl<DeepRequired<HTMLInputElement>>> & {root?: Record<string, GlobalError> & GlobalError};
+    error: FieldError | undefined;
 }
 
 export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputElement>) => {
@@ -50,13 +50,12 @@ export const Input = forwardRef((props: InputProps, ref: ForwardedRef<HTMLInputE
         }
 
         return (
-            <div className={classNames(cls.InputWrapper, {[cls.InputError]: error}, [])}>
+            <div className={classNames(cls.InputWrapper, {[cls.InputError]: error !== undefined}, [])}>
                 <input
                     maxLength={maxLength}
                     className={classNames(cls.Input, {}, [className, InputTypeClasses[buttonType]])}
                     placeholder={placeholder}
                     id={id}
-                    ref={ref}
                     autoComplete={'false'}
                     type={buttonTypeState}
                     {...register}

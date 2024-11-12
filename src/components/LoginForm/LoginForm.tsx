@@ -22,42 +22,40 @@ export const LoginForm = (props: LoginFormProps) => {
         handleSubmit,
         trigger,
         formState: { errors },
-    } = useForm<HTMLInputElement>()
+    } = useForm<loginDataInputs>()
 
-    interface loginDataInterface {
+    interface loginDataInputs {
         loginUsername: string;
         loginPassword: string
     }
 
-    const onSubmit: SubmitHandler<HTMLInputElement> = async (data: loginDataInterface) => {
+    const onSubmit: SubmitHandler<loginDataInputs> = (data) => {
         const newData: loginByUsernameProps = {
             username: data.loginUsername,
             password: data.loginPassword
         }
 
-        await dispatch(loginByUsername(newData))
+        dispatch(loginByUsername(newData))
     }
 
     const loginFormUsernameReg = register("loginUsername", { required: true, onBlur: () => trigger('loginUsername')});
     const loginFormPasswordReg = register("loginPassword", { required: true, minLength: 5, onBlur: () => trigger('loginPassword')})
 
     return (
-        <div className={classNames(cls.LoginForm, {}, [className])}>
-            <h2 className={cls.LoginFormTitle}>Авторизация</h2>
-            <form className={classNames(cls.LoginFormForma, {}, [])} onSubmit={handleSubmit(onSubmit)}>
-                <div className={cls.InputWrapper}>
-                    <label className={cls.InputTitle} htmlFor='loginUsername'>Имя пользователя <span>*</span></label>
-                    <Input
-                        id={'loginUsername'}
-                        error={errors.loginUsername}
+    <div className={classNames(cls.LoginForm, {}, [className])}>
+        <h2 className={cls.LoginFormTitle}>Авторизация</h2>
+        <form className={classNames(cls.LoginFormForma, {}, [])} onSubmit={handleSubmit(onSubmit)}>
+            <div className={cls.InputWrapper}>
+                <label className={cls.InputTitle} htmlFor='loginUsername'>Имя пользователя <span>*</span></label>
+                <Input
+                    id={'loginUsername'}
+                    error={errors.loginUsername}
                         className={classNames('', {}, [])}
                         placeholder={'Введите имя пользователя'}
                         register={{...loginFormUsernameReg}}
                     />
-
                     {errors.loginUsername && <span className={cls.InputErrorText}>Обязательное поле</span>}
                 </div>
-
                 <div className={cls.InputWrapper}>
                     <label className={cls.InputTitle} htmlFor='loginPassword'>Пароль<span>*</span></label>
                     <Input
