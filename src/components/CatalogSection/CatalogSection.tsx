@@ -10,6 +10,7 @@ import {MainContainer} from "@/components/MainContainer";
 import {Link} from "react-router-dom";
 import React, {useEffect, useRef} from "react";
 import {usePreventOuterScroll} from "@/hooks/usePreventOuterScroll";
+import {GoodCategories} from "@/types/productsTypes";
 
 interface CatalogSectionProps {
     className?: string;
@@ -25,12 +26,12 @@ export const CatalogSection = (props: CatalogSectionProps) => {
     }
 
     const items: catalogItemInterface[] = [
-        {title: 'Смартфоны', img: PhoneImage, path: '/goods?type=phones'},
-        {title: 'Ноутбуки', img: LaptopImage, path: '/goods?type=laptops'},
-        {title: 'Компьютеры', img: ComputerImage, path: '/goods?type=computers'},
-        {title: 'Телевизоры', img: TvImage, path: '/goods?type=tvs'},
-        {title: 'Планшеты', img: TabletImage, path: '/goods?type=tablets'},
-        {title: 'Колонки', img: SpeakerImage, path: '/goods?type=music_speakers'},
+        {title: 'Смартфоны', img: PhoneImage, path: `/goods?type=${GoodCategories.PHONES}`},
+        {title: 'Ноутбуки', img: LaptopImage, path: `/goods?type=${GoodCategories.LAPTOPS}`},
+        {title: 'Компьютеры', img: ComputerImage, path: `/goods?type=${GoodCategories.COMPUTERS}`},
+        {title: 'Телевизоры', img: TvImage, path: `/goods?type=${GoodCategories.TVS}`},
+        {title: 'Планшеты', img: TabletImage, path: `/goods?type=${GoodCategories.TABLETS}`},
+        {title: 'Колонки', img: SpeakerImage, path: `/goods?type=${GoodCategories.MUSIC_SPEAKERS}`},
     ]
 
     const catalogRef = useRef<HTMLDivElement>(null)

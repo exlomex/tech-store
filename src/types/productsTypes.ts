@@ -1,5 +1,14 @@
 // export type ProductType = 'TVS' | 'PHONES' | 'LAPTOPS' | 'COMPUTERS' | 'TABLETS' | 'MUSIC_SPEAKERS';
 
+export enum GoodCategories {
+    PHONES = 'phones',
+    LAPTOPS = 'laptops',
+    COMPUTERS = 'computers',
+    TVS = 'tvs',
+    TABLETS = 'tablets',
+    MUSIC_SPEAKERS = 'music_speakers',
+}
+
 type InMemory = 'M_32' | 'M_64' | 'M_128' | 'M_256' | 'M_512' | 'M_1024';
 type OperationMemory = 'M_2' | 'M_4' | 'M_8' | 'M_16';
 // TODO replace qualcomm

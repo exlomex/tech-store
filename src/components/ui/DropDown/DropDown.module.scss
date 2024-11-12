@@ -7,7 +7,7 @@
         background-color: transparent;
         padding-top: 10px;
         right: 0;
-        top: 44px;
+        top: 98%;
         z-index: 5000;
         transition: opacity .2s ease-out, transform .2s ease-out, visibility .2s ease-out;
 
@@ -24,6 +24,14 @@
             border-radius: 8px;
             display: flex;
             flex-direction: column;
+
+            .DropDownTitle {
+                padding-left: 14px;
+                font-size: 16px;
+                font-weight: 500;
+                margin-bottom: 8px;
+                margin-top: 5px;
+            }
 
             .DropDownItem {
                 cursor: pointer;

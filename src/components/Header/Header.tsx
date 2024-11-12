@@ -15,7 +15,13 @@ import {UserSliceActions} from "@/store/reducers/UserSlice";
 import {UserModalType, UserRoles} from "@/store/reducers/UserSliceSchema";
 import {useSelector} from "react-redux";
 import {getUserRole} from "@/store/selectors/getUserValues";
-import {Link} from "react-router-dom";
+import {GoodCategories} from "@/types/productsTypes";
+import {ReactComponent as LaptopIcon} from '@/assets/categories/icons/LaptopIcon.svg'
+import {ReactComponent as TvIcon} from '@/assets/categories/icons/TvIcon.svg'
+import {ReactComponent as PhoneIcon} from '@/assets/categories/icons/PhoneIcon.svg'
+import {ReactComponent as ComputerIcon} from '@/assets/categories/icons/ComputerIcon.svg'
+import {ReactComponent as TabletIcon} from '@/assets/categories/icons/TabletIcon.svg'
+import {ReactComponent as MusicSpeaker} from '@/assets/categories/icons/MusicSpeaker.svg'
 
 interface HeaderProps {
     className?: string;
@@ -67,30 +73,82 @@ export const Header = (props: HeaderProps) => {
         }
     }
 
+    const CatalogItems: DropdownItem[] = [
+        {
+            content: <div className={cls.ItemsDropDown}>
+                <div className={cls.ItemSvgWrapper}><PhoneIcon width={'11px'}/></div>
+                <p>Смартфоны</p>
+            </div>, to: `/goods?type=${GoodCategories.PHONES}`
+        },
+        {
+            content: <div className={cls.ItemsDropDown}>
+                <div className={cls.ItemSvgWrapper}><LaptopIcon width={'25px'}/></div>
+                <p>Ноутбуки</p>
+            </div>, to: `/goods?type=${GoodCategories.LAPTOPS}`
+        },
+        {
+            content: <div className={cls.ItemsDropDown}>
+                <div className={cls.ItemSvgWrapper}><ComputerIcon width={'14px'}/></div>
+                <p>Компьютеры</p>
+            </div>, to: `/goods?type=${GoodCategories.COMPUTERS}`
+        },
+        {
+            content: <div className={cls.ItemsDropDown}>
+                <div className={cls.ItemSvgWrapper}><TvIcon width={'20px'}/></div>
+                <p>Телевизоры</p>
+            </div>, to: `/goods?type=${GoodCategories.TVS}`
+        },
+        {
+            content: <div className={cls.ItemsDropDown}>
+                <div className={cls.ItemSvgWrapper}><TabletIcon width={'20px'}/></div>
+                <p>Планшеты</p>
+            </div>, to: `/goods?type=${GoodCategories.TABLETS}`
+        },
+        {
+            content: <div className={cls.ItemsDropDown}>
+                <div className={cls.ItemSvgWrapper}><MusicSpeaker width={'14px'}/></div>
+                <p>Колонки</p>
+            </div>, to: `/goods?type=${GoodCategories.MUSIC_SPEAKERS}`
+        },
+    ]
+
     const ProfileTrigger = () => (
         <a className={cls.nav_item}
-            onMouseEnter={() => setIsProfileDropDownActive(true)}
+           onMouseEnter={() => setIsProfileDropDownActive(true)}
         >
             <ProfileSvg/>
             <p className={cls.nav_title}>Профиль</p>
         </a>
     )
 
+    const CatalogTrigger = () => (
+        <a className={cls.nav_item}
+           onMouseEnter={() => setIsCatalogDropDownActive(true)}
+        >
+            <CatalogSvg/>
+            <p className={cls.nav_title}>Каталог</p>
+        </a>
+    )
+
+    const [isCatalogDropDownActive, setIsCatalogDropDownActive] = useState(false)
     const [isProfileDropDownActive, setIsProfileDropDownActive] = useState(false)
 
     return (
         <div className={classNames(cls.Header, {}, [className])}>
-            <MainContainer>
+        <MainContainer>
                 <div className={cls.Header_inner}>
                     <img src={LogoIcon} className={cls.Logo} alt="goods"/>
 
                     <SearchGood/>
 
                     <nav className={cls.Header_nav}>
-                        <a className={cls.nav_item}>
-                            <CatalogSvg/>
-                            <p className={cls.nav_title}>Каталог</p>
-                        </a>
+                        <DropDown
+                            text={'Категории: '}
+                            items={CatalogItems}
+                            trigger={<CatalogTrigger/>}
+                            isActive={isCatalogDropDownActive}
+                            onClose={setIsCatalogDropDownActive}
+                        />
                         <a className={cls.nav_item}>
                             <CardSvg/>
                             <p className={cls.nav_title}>Корзина</p>

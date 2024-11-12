@@ -16,6 +16,7 @@ interface DropDownProps {
     trigger: ReactNode;
     isActive: boolean;
     onClose: Dispatch<SetStateAction<boolean>>
+    text?: string;
 }
 
 export const DropDown = memo((props: DropDownProps) => {
@@ -25,6 +26,7 @@ export const DropDown = memo((props: DropDownProps) => {
         items,
         isActive,
         onClose,
+        text
     } = props;
 
     return (
@@ -34,6 +36,8 @@ export const DropDown = memo((props: DropDownProps) => {
                 {trigger}
                 <div className={classNames(cls.DropDownWrapper, {[cls.MenuOpen]: isActive}, [])}>
                     <div className={cls.DropDownInner}>
+                        {text && <div className={cls.DropDownTitle}>{text}</div>}
+
                         {items.map((item, index) => (
                             <>
                                 {item.to && <Link to={item.to} key={index} className={cls.DropDownItem}>
