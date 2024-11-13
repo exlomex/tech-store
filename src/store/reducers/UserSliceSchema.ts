@@ -16,6 +16,7 @@ export interface UserSliceSchema {
     role: UserRoles;
     modalIsOpen: boolean;
     modalType?: UserModalType;
+    searchIsOpen: boolean;
 }
 
 export interface tokenInfoTypes extends JwtPayload {

@@ -8,7 +8,8 @@ import {UserData} from "../services/loginByUsername";
 const initialState: UserSliceSchema = {
     isAuth: false,
     role: UserRoles.GUEST,
-    modalIsOpen: false
+    modalIsOpen: false,
+    searchIsOpen: false
 };
 
 export const UserSlice = createSlice({
@@ -43,7 +44,10 @@ export const UserSlice = createSlice({
         },
         setModalType: (state: UserSliceSchema, action: PayloadAction<UserModalType>) => {
             state.modalType = action.payload;
-        }
+        },
+        setSearchIsOpen: (state: UserSliceSchema, action: PayloadAction<boolean>) => {
+            state.searchIsOpen = action.payload;
+        },
     },
 });
 

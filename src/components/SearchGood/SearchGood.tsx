@@ -5,6 +5,10 @@ import {ChangeEvent, useEffect, useRef, useState} from "react";
 import {LazyFetchGoodsByString} from "@/components/SearchGood/api/fetchGoodsByString";
 import useDebounce from "@/hooks/useDebounce";
 import {DropDownList} from "@/components/ui/DropDownList";
+import {useAppDispatch} from "@/hooks/useAppDispatch";
+import {UserSliceActions} from "@/store/reducers/UserSlice";
+import {useSelector} from "react-redux";
+import {getUserSearchIsOpen} from "@/store/selectors/getUserValues";
 
 interface SearchGoodProps {
     className?: string;
@@ -13,14 +17,16 @@ interface SearchGoodProps {
 export const SearchGood = (props: SearchGoodProps) => {
     const { className } = props;
 
-    const [inputActive, setInputActive] = useState<boolean>(false)
+    const dispatch = useAppDispatch()
+    const isSearchOpen = useSelector(getUserSearchIsOpen)
+
     const inputRef = useRef<HTMLInputElement>(null)
     const overlayRef = useRef<HTMLDivElement>(null)
 
     const [triggerGoodsFetch, {data: searchData, isLoading: searchIsLoading, error, isFetching: searchIsFetching}] = LazyFetchGoodsByString()
 
     const onSearchClickHandler = () => {
-        setInputActive(true)
+        if (!isSearchOpen) dispatch(UserSliceActions.setSearchIsOpen(true))
 
         inputRef.current && inputRef.current.focus()
     }
@@ -28,7 +34,7 @@ export const SearchGood = (props: SearchGoodProps) => {
     useEffect(() => {
         const onClickHandler = (e: MouseEvent) => {
             if (e.target === overlayRef.current) {
-                setInputActive(false)
+                dispatch(UserSliceActions.setSearchIsOpen(false))
             }
         }
         document.addEventListener('click',  onClickHandler)
@@ -38,7 +44,7 @@ export const SearchGood = (props: SearchGoodProps) => {
     useEffect(() => {
         const onClickHandler = (e: KeyboardEvent) => {
             if (e.key === 'Escape') {
-                setInputActive(false)
+                dispatch(UserSliceActions.setSearchIsOpen(false))
                 inputRef.current && inputRef.current.blur()
             }
         }
@@ -62,11 +68,11 @@ export const SearchGood = (props: SearchGoodProps) => {
 
     return (
         <>
-            <div className={classNames(cls.SearchGood, {[cls.inputActive]: inputActive}, [className])} onClick={onSearchClickHandler}>
+            <div className={classNames(cls.SearchGood, {[cls.inputActive]: isSearchOpen}, [className])} onClick={onSearchClickHandler}>
                 <div className={cls.Input_wrapper}>
                     <SearchSvg/>
                     <input
-                        className={classNames(cls.Input, {[cls.inputActive]: inputActive}, [])}
+                        className={classNames(cls.Input, {[cls.inputActive]: isSearchOpen}, [])}
                         placeholder={'Поиск'} type="text" ref={inputRef}
                         onChange={onInputChange} value={queryValue}
                     />
@@ -79,9 +85,9 @@ export const SearchGood = (props: SearchGoodProps) => {
                     {/*}*/}
 
                 </div>
-                {debouncedQueryValue && inputActive && <DropDownList items={searchData} isLoading={searchIsFetching}/>}
+                {debouncedQueryValue && isSearchOpen && <DropDownList items={searchData} isLoading={searchIsFetching}/>}
             </div>
-            <div ref={overlayRef} className={classNames(cls.Overlay, {[cls.Overlay_active]: inputActive}, [])}></div>
+            <div ref={overlayRef} className={classNames(cls.Overlay, {[cls.Overlay_active]: isSearchOpen}, [])}></div>
         </>
     )
 };

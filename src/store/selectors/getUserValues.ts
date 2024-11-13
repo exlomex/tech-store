@@ -21,3 +21,8 @@ export const getUserRole = createSelector(
     getUser,
     (search: UserSliceSchema) => search.role,
 );
+
+export const getUserSearchIsOpen = createSelector(
+    getUser,
+    (search: UserSliceSchema) => search.searchIsOpen,
+);

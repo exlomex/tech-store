@@ -114,7 +114,7 @@ export const GoodReviews = (props: GoodReviewsProps) => {
 
                     <div className={cls.GoodWrapper}>
                         {reviews.map(review => (
-                            <Review review={review}/>
+                            <Review key={review.id} review={review}/>
                         ))}
                     </div>
                 </div>
