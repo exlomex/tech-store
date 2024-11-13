@@ -7,6 +7,7 @@ const extendedApi = rtkApi.injectEndpoints({
             query: ({id}) => ({
                 url: `/reviews/good/${id}`,
             }),
+            providesTags: ['Review']
         }),
 
     }),

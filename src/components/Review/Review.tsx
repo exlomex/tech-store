@@ -13,7 +13,7 @@ export const Review = (props: ReviewProps) => {
     return (
         <div className={classNames(cls.Review, {}, [className])}>
             <div className={cls.ReviewTopLine}>
-                <div className={cls.ReviewTopLineTitle}>Имя Фамилия</div>
+                <div className={cls.ReviewTopLineTitle}>{review.userId.firstName} {review.userId.lastName}</div>
 
                 <Rating
                     className={cls.GoodReviewRatingStar}

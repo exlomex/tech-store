@@ -83,7 +83,10 @@ export interface ReviewInterface {
     id: number;
     description: string;
     rating: number;
-    userId: number;
+    userId: {
+        firstName: string;
+        lastName: string;
+    };
     goodId: number;
 }
 

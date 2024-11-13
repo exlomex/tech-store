@@ -19,4 +19,9 @@
     &.FullWidthButton {
         width: 100%;
     }
+
+    &[disabled] {
+        cursor: auto;
+        background-color: var(--light-grey);
+    }
 }
