@@ -22,6 +22,7 @@ import {ReactComponent as PhoneIcon} from '@/assets/categories/icons/PhoneIcon.s
 import {ReactComponent as ComputerIcon} from '@/assets/categories/icons/ComputerIcon.svg'
 import {ReactComponent as TabletIcon} from '@/assets/categories/icons/TabletIcon.svg'
 import {ReactComponent as MusicSpeaker} from '@/assets/categories/icons/MusicSpeaker.svg'
+import {Link} from "react-router-dom";
 
 interface HeaderProps {
     className?: string;
@@ -137,7 +138,7 @@ export const Header = (props: HeaderProps) => {
         <div className={classNames(cls.Header, {}, [className])}>
         <MainContainer>
                 <div className={cls.Header_inner}>
-                    <img src={LogoIcon} className={cls.Logo} alt="goods"/>
+                    <Link to={'/'}><img src={LogoIcon} className={cls.Logo} alt="goods"/></Link>
 
                     <SearchGood/>
 

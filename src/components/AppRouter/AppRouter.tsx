@@ -1,7 +1,8 @@
-import {Route, Routes} from 'react-router-dom';
-import {MainPage} from "@/pages/MainPage";
-import {RequireAuth} from "@/components/RequireAuth";
-import {UserRoles} from "@/store/reducers/UserSliceSchema";
+import { Route, Routes } from 'react-router-dom';
+import { MainPage } from "@/pages/MainPage";
+import { RequireAuth } from "@/components/RequireAuth";
+import { UserRoles } from "@/store/reducers/UserSliceSchema";
+import { GoodPage } from '@/pages/GoodPage'
 
 export const AppRouter = () => (
         <Routes>
@@ -17,7 +18,7 @@ export const AppRouter = () => (
                 <div>goods by category page</div>
             }/>
             <Route path="/goods/:id" element={
-                <div>good page</div>
+                <GoodPage/>
             }/>
             {/*<Route path="*" element={<Navigate to="/404page" replace />}/>*/}
         </Routes>
