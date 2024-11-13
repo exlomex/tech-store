@@ -79,7 +79,7 @@ export const ScreenResolutionLabelsMap: Record<ScreenResolution, string> = {
     FOUR_K: '4K'
 };
 
-interface ReviewInterface {
+export interface ReviewInterface {
     id: number;
     description: string;
     rating: number;

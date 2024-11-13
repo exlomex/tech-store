@@ -1,0 +1,37 @@
+.GoodReviews {
+    margin-top: 40px;
+
+    .GoodReviewsInner {
+
+        .GoodReviewsTitle {
+            font-size: 1.778em;
+            margin-bottom: 25px;
+        }
+
+        .GoodReviewCount {
+            font-weight: 400;
+            color: var(--dark-grey);
+            font-size: 1.111em;
+            margin-bottom: 25px;
+        }
+
+        .GoodReviewRating {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0 10px;
+            margin-bottom: 25px;
+
+            .GoodReviewRatingTitle {
+                font-size: 1.111em;
+                font-weight: 400;
+                color: var(--dark-grey);
+            }
+
+        }
+
+        .GoodWrapper {
+
+        }
+    }
+}

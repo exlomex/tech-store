@@ -1,0 +1,21 @@
+.Review {
+    width: 90%;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    padding: 25px 20px;
+    background-color: var(--field);
+    border: 1px solid var(--main-skeleton);
+
+    .ReviewTopLine {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 13px;
+        font-weight: 300;
+        color: var(--dark-grey);
+    }
+
+    .ReviewTitle {
+        font-size: 1.111em;
+        font-weight: 400;
+    }
+}

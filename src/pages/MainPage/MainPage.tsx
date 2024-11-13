@@ -19,26 +19,12 @@ interface MainPageProps {
 
 export const MainPage = (props: MainPageProps) => {
     const { className } = props;
-    const [isOpen, setIsOpen] = useState<boolean>(false)
-    const onCloseHandler = () => {
-        dispatch(UserSliceActions.setModalIsOpen(false))
-    }
-
-    const dispatch = useAppDispatch()
-
-    const isModalOpen = useSelector(getUserIsModalOpen)
-    const modalType = useSelector(getUserModalType) || 'auth_modal'
 
     return (
         <div className={classNames(cls.MainPage, {}, [className])}>
             <Header/>
             <CatalogSection/>
             <AllGoodsSection/>
-            <Modal isOpen={isModalOpen} onClose={onCloseHandler}>
-                {
-                    modalType === UserModalType.AUTH_MODAL ? <LoginForm/> : <RegisterForm/>
-                }
-            </Modal>
         </div>
     )
 };

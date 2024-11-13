@@ -8,7 +8,7 @@ import SpeakerImage from '@/assets/categories/speakerCategoryIcon.png'
 import TabletImage from '@/assets/categories/tabletCategoryIcon.png'
 import {MainContainer} from "@/components/MainContainer";
 import {Link} from "react-router-dom";
-import React, {useEffect, useRef} from "react";
+import React, {useRef} from "react";
 import {usePreventOuterScroll} from "@/hooks/usePreventOuterScroll";
 import {GoodCategories} from "@/types/productsTypes";
 
