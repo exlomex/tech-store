@@ -72,7 +72,7 @@ export const GoodReviews = (props: GoodReviewsProps) => {
             <MainContainer>
                 <div className={cls.GoodReviewsInner}>
                     <h3 className={cls.GoodReviewsTitle}>Отзывы</h3>
-                    <p className={cls.GoodReviewCount}>Всего: {reviews.length} {reviews.length < 6 && reviews.length > 0 ? 'отзыва' : 'отзывов'}</p>
+                    <p className={cls.GoodReviewCount}>Всего: {reviews.length} {reviews.length < 5 && reviews.length > 0 ? 'отзыва' : 'отзывов'}</p>
 
                     <div className={cls.GoodReviewRating}>
                         <p className={cls.GoodReviewRatingTitle}>Средняя оценка: {averageRating(reviews) || 0}</p>

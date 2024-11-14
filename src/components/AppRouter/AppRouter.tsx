@@ -3,6 +3,7 @@ import { MainPage } from "@/pages/MainPage";
 import { RequireAuth } from "@/components/RequireAuth";
 import { UserRoles } from "@/store/reducers/UserSliceSchema";
 import { GoodPage } from '@/pages/GoodPage'
+import {CategoryPage} from "@/pages/CategoryPage/CategoryPage";
 
 export const AppRouter = () => (
         <Routes>
@@ -15,7 +16,7 @@ export const AppRouter = () => (
                 </RequireAuth>
             }/>
             <Route path="/goods" element={
-                <div>goods by category page</div>
+                <CategoryPage/>
             }/>
             <Route path="/goods/:id" element={
                 <GoodPage/>

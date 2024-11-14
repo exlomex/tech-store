@@ -1,0 +1,51 @@
+::-webkit-scrollbar {
+    width: 4px;
+    border: 1px solid #d5d5d5;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 0;
+    background: #eeeeee;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #d7d7d7;
+
+}
+
+.CategoryFilters {
+    max-height: calc(100vh - 80px - 100px);
+    overflow: auto;
+    width: 290px;
+
+    box-shadow: 1px 1px 20px 0 rgba(0, 0, 0, 0.1);
+
+    & > div {
+        transition: all 2s ease;
+    }
+
+    & > div:nth-child(n + 4) {
+        display: none;
+
+        &.isFilterShows {
+            display: block;
+        }
+    }
+
+    .CategoryFiltersIsShowAll {
+        color: var(--blue);
+        background-color: transparent;
+        display: block;
+        font-size: 0.778em;
+        font-weight: 300;
+    }
+
+    .FiltersButton {
+        height: 36px;
+        width: 150px;
+        font-weight: 300;
+        font-size: 0.778em;
+        margin-top: 15px;
+    }
+}

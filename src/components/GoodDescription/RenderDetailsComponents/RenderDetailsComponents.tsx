@@ -7,6 +7,11 @@ import {
     ProcessorBrandLabelsMap,
     ProductsLabelsMap, ScreenResolutionLabelsMap, TabletDetails, TVDetails
 } from "@/types/productsTypes";
+import {FC} from "react";
+
+export const RenderProductDetailByType: FC<{detailLabel?: string,detailValue?: string}> = ({detailLabel, detailValue}) => (
+    <p><span>{detailLabel || ''}</span> <span/> <span>{detailValue || ''}</span></p>
+)
 
 export const RenderPhoneDetails = (details: PhoneDetails) => (
     <>
@@ -37,13 +42,13 @@ export const RenderTVDetails = (details: TVDetails) => (
 
 export const RenderLaptopDetails = (details: LaptopDetails) => (
     <>
-        <p><span>{ProductsLabelsMap['inMemory']}:</span> <span></span> <span>{InMemoryLabelsMap[details.inMemory]}</span></p>
-        <p><span>{ProductsLabelsMap['operationMemory']}:</span> <span></span> <span>{OperationMemoryLabelsMap[details.operationMemory]}</span></p>
-        <p><span>{ProductsLabelsMap['screenDiagonal']}:</span> <span></span> <span>{details.screenDiagonal} дюймов</span></p>
-        <p><span>{ProductsLabelsMap['brand']}:</span> <span></span> <span>{details.brand}</span></p>
-        <p><span>{ProductsLabelsMap['processorBrand']}:</span> <span></span> <span>{details.processorBrand}</span></p>
-        <p><span>{ProductsLabelsMap['operationSystem']}:</span> <span></span> <span>{details.operationSystem}</span></p>
-        <p><span>{ProductsLabelsMap['screenResolution']}:</span> <span></span> <span>{ScreenResolutionLabelsMap[details.screenResolution]}</span></p>
+        <RenderProductDetailByType detailLabel={`${ProductsLabelsMap['inMemory']}:`} detailValue={InMemoryLabelsMap[details.inMemory]}/>
+        <RenderProductDetailByType detailLabel={`${ProductsLabelsMap['operationMemory']}:`} detailValue={OperationMemoryLabelsMap[details.operationMemory]}/>
+        <RenderProductDetailByType detailLabel={`${ProductsLabelsMap['screenDiagonal']}:`} detailValue={`${details.screenDiagonal} дюймов`}/>
+        <RenderProductDetailByType detailLabel={`${ProductsLabelsMap['brand']}:`} detailValue={details.brand}/>
+        <RenderProductDetailByType detailLabel={`${ProductsLabelsMap['processorBrand']}:`} detailValue={details.processorBrand}/>
+        <RenderProductDetailByType detailLabel={`${ProductsLabelsMap['operationSystem']}:`} detailValue={details.operationSystem}/>
+        <RenderProductDetailByType detailLabel={`${ProductsLabelsMap['screenResolution']}:`} detailValue={ScreenResolutionLabelsMap[details.screenResolution]}/>
     </>
 );
 

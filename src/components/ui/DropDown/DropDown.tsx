@@ -39,7 +39,7 @@ export const DropDown = memo((props: DropDownProps) => {
                         {text && <div className={cls.DropDownTitle}>{text}</div>}
 
                         {items.map((item, index) => (
-                            <>
+                            <div key={index}>
                                 {item.to && <Link to={item.to} key={index} className={cls.DropDownItem}>
                                     {item.content}
                                 </Link>}
@@ -48,7 +48,7 @@ export const DropDown = memo((props: DropDownProps) => {
                                         {item.content}
                                     </div>
                                 }
-                            </>
+                            </div>
                         ))}
                     </div>
                 </div>

@@ -1,4 +1,5 @@
 export type ProductType = 'TVS' | 'PHONES' | 'LAPTOPS' | 'COMPUTERS' | 'TABLETS' | 'MUSIC_SPEAKERS';
+export type ProductTypeLowerCase = 'tvs' | 'phones' | 'laptops' | 'computers' | 'tablets' | 'music_speakers';
 
 export enum GoodCategories {
     PHONES = 'phones',
@@ -37,9 +38,26 @@ export const ProductsLabelsMap: Partial<Record<keyof LaptopDetails | keyof Compu
 type InMemory = 'M_32' | 'M_64' | 'M_128' | 'M_256' | 'M_512' | 'M_1024';
 type OperationMemory = 'M_2' | 'M_4' | 'M_8' | 'M_16';
 type ProcessorBrand = 'APPLE' | 'MEDIATEK' | 'QUALCOMM';
+type LaptopOperationSystem = 'MACOS' | 'WINDOWS' | 'LINUX'
 type OperationSystem = 'IOS' | 'ANDROID';
 type ScreenResolution = 'FULL_HD' | 'TWO_K' | 'FOUR_K';
-type HZ = 'HZ_60' | 'HZ_140'
+type HZ = 'HZ_60' | 'HZ_140';
+type LaptopBrand = 'APPLE' | 'SAMSUNG' | 'SONY' | 'LENOVO';
+type ScreenDiagonal = 13 | 15 | 17 | 19 | 21 | 24 | 27 | 32 | 64 | 42 | 46 | 50 | 52 | 55 | 4 | 6 | 7 | 8 | 9 | 10 ;
+type ComputerProcessorBrand = 'INTEL' | 'AMD';
+type ComputerCase = "TOWER" | 'MINI';
+type TabletBrand = 'APPLE' | 'SAMSUNG' | 'SONY' | 'LENOVO';
+type TvMatrix = 'LED' | 'OLED' | 'QLED';
+type TvBrand = 'SONY' | 'SAMSUNG' | 'APPLE' | 'NOKIA';
+type SpeakerType = 'AUDIO_SYSTEM' | 'SMART_SPEAKER';
+type MusicFormat = "F_1_0" | "F_1_1" | 'F_2_0' | 'F_2_1' | 'F_5_1';
+type MusicEnergyType = "BATTERY" | 'NETWORK';
+type MusicBrand = "SONY" | 'JBL';
+type MusicPower = 100 | 200 | 300 | 400 | 500 | 700 | 600 | 800 | 900 | 1000;
+type PhoneScreenType = 'AMOLED' | 'OLED' | 'IPS'
+
+export type unionDescriptionsValues = '' | false | true | LaptopOperationSystem | PhoneScreenType | InMemory | OperationMemory | ProcessorBrand | OperationSystem | ScreenResolution | HZ | ScreenDiagonal | LaptopBrand | ComputerProcessorBrand | ComputerCase | TabletBrand | TvMatrix | TvBrand | SpeakerType | MusicFormat | MusicEnergyType | MusicBrand | MusicPower;
+
 
 export const HZLabelsMap: Record<HZ, number> = {
     HZ_60: 60,
@@ -105,9 +123,9 @@ export interface LaptopDetails {
     id: number;
     inMemory: InMemory;
     operationMemory: OperationMemory;
-    screenDiagonal: number;
-    brand: 'APPLE' | 'SAMSUNG' | 'SONY' | 'LENOVO';
-    processorBrand: ProcessorBrand;
+    screenDiagonal: ScreenDiagonal;
+    brand: LaptopBrand;
+    processorBrand: ComputerProcessorBrand;
     operationSystem: OperationSystem;
     screenResolution: ScreenResolution;
 }
@@ -117,8 +135,8 @@ export interface ComputerDetails {
     id: number;
     "inMemory": InMemory,
     "operationMemory": OperationMemory,
-    "processorBrand": 'INTEL' | 'AMD',
-    "case": "TOWER" | 'MINI',
+    "processorBrand": ComputerProcessorBrand,
+    "case": ComputerCase,
     "operationSystem": boolean
 }
 
@@ -128,35 +146,37 @@ export interface TabletDetails {
     "inMemory": InMemory,
     "operationMemory": OperationMemory,
     "operationSystem": OperationSystem,
-    "brand": 'APPLE' | 'SAMSUNG' | 'SONY' | 'LENOVO',
-    "diagonalScreen": number;
+    "brand": TabletBrand,
+    "diagonalScreen": ScreenDiagonal;
 }
 
 export interface MusicSpeakerDetails {
     type: 'music_speakers';
     id: number;
-    "speakerType": 'AUDIO_SYSTEM' | 'SMART_SPEAKER';
-    "format": "F_1_0" | "F_1_1" | 'F_2_0' | 'F_2_1' | 'F_5_1';
-    "energyType": "BATTERY" | 'NETWORK';
-    "brand": "SONY" | 'JBL';
-    "power": number;
+    "speakerType": SpeakerType;
+    "format": MusicFormat;
+    "energyType": MusicEnergyType;
+    "brand": MusicBrand;
+    "power": MusicPower;
 }
 
 export interface TVDetails {
     type: 'tvs';
     id: number;
-    screenDiagonal: number;
+    screenDiagonal: ScreenDiagonal;
     screenResolution: ScreenResolution;
-    matrix: 'LED' | 'OLED' | 'QLED';
+    matrix: TvMatrix;
     hdr: boolean;
     hz: HZ;
-    brand: 'SONY' | 'SAMSUNG' | 'APPLE' | 'NOKIA';
+    brand: TvBrand;
 }
+
+
 
 export interface PhoneDetails {
     type: 'phones';
     id: number;
-    screenType: 'AMOLED' | 'OLED' | 'IPS';
+    screenType: PhoneScreenType;
     inMemory: InMemory;
     operationMemory: OperationMemory;
     processorBrand: ProcessorBrand;
@@ -199,4 +219,5 @@ interface MusicSpeakerProduct extends BaseProduct {
     details: MusicSpeakerDetails;
 }
 
+export type DetailsUnion = PhoneDetails | MusicSpeakerDetails | TabletDetails | LaptopDetails | ComputerDetails | TVDetails
 export type ProductInterface = PhoneProduct | LaptopProduct | ComputerProduct | TVProduct | TabletProduct | MusicSpeakerProduct;

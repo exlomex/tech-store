@@ -1,0 +1,62 @@
+.CheckboxFilter {
+    .CheckboxFilterTitle {
+        font-size: 0.889em;
+        font-weight: 400;
+        margin-bottom: 16px;
+    }
+
+    .RadioGroup {
+        display: flex;
+        flex-direction: column;
+
+        .RadioGroupField {
+            display: flex;
+            align-items: center;
+            gap: 0 7px;
+            height: 20px;
+            margin-bottom: 14px;
+
+            .Radio {
+                cursor: pointer;
+                position: relative;
+                width: 20px;
+                aspect-ratio: 1 / 1;
+                border-radius: 4px;
+                border: 2px solid var(--blue);
+                transition: all .3s ease;
+
+                &:hover {
+                    transform: scale(0.95);
+                }
+
+                & span {
+                    display: block;
+                    position: absolute;
+                    width: 10px;
+                    border-radius: 2px;
+                    aspect-ratio: 1 / 1;
+                    top: 50%;
+                    left: 50%;
+                    transform: translateY(-50%) translateX(-50%);
+                    transition: all .3s ease;
+                }
+
+
+                &[data-checked] {
+                    border-color: var(--blue);
+                    //background-color:var(--light-blue);
+
+                    span {
+                        background-color: var(--radio-span);
+                    }
+                }
+            }
+
+            .RadioTitle {
+                font-size: 0.889em;
+                font-weight: 300;
+                color: var(--dark-grey);
+            }
+        }
+    }
+}
