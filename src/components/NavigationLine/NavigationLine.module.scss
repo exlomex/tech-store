@@ -1,0 +1,36 @@
+.NavigationLine {
+    margin-bottom: 25px;
+
+    .PathLine {
+        display: flex;
+        gap: 0 3px;
+        font-size: 0.889em;
+        margin-bottom: 30px;
+        font-weight: 400;
+
+        .NavigationLinePathBefore {
+            color: var(--light-grey);
+        }
+
+        .NavigationLinePathAfter {
+            color: var(--dark-grey);
+        }
+    }
+
+    .ContentLine {
+        display: flex;
+        gap: 0 10px;
+        align-items: center;
+        .NavigationLineLink {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 24px;
+            cursor: pointer;
+        }
+
+        .NavigationLineCurrentPath {
+            font-size: 1.778em;
+        }
+    }
+}

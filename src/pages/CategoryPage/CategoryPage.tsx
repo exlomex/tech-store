@@ -8,6 +8,12 @@ import {CategoryFilters} from "@/components/CategoryFilters";
 import {ProductTypeLowerCase} from "@/types/productsTypes";
 import {useAppDispatch} from "@/hooks/useAppDispatch";
 import {FiltersSliceActions} from "@/store/reducers/FiltersSlice";
+import {NavigationLine} from "@/components/NavigationLine";
+import {
+    navigationLineOptions,
+    navigationLineUnion,
+    TranslatedCategories
+} from "@/components/NavigationLine/types/navigationLineLevels";
 
 interface CategoryPageProps {
     className?: string;
@@ -19,7 +25,9 @@ export const CategoryPage = (props: CategoryPageProps) => {
     const dispatch = useAppDispatch()
 
     const [searchParams] = useSearchParams();
-    const catagoryType = searchParams.get('type') as ProductTypeLowerCase || 'none';
+    const catagoryType = searchParams.get('type') as ProductTypeLowerCase;
+
+    const translatedCurrentCategory = TranslatedCategories[catagoryType] as navigationLineUnion
 
     useEffect(() => {
         dispatch(FiltersSliceActions.setCurrentGoodCategory(catagoryType))
@@ -31,6 +39,7 @@ export const CategoryPage = (props: CategoryPageProps) => {
         <div className={classNames(cls.CategoryPage, {}, [className])}>
             <Header/>
             <MainContainer>
+                <NavigationLine currentPath={translatedCurrentCategory} previousPaths={['Главная']}/>
                 <div className={cls.CategoryPageInner}>
                     <CategoryFilters categoryType={catagoryType}/>
                 </div>

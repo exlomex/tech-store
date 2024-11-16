@@ -1,6 +1,6 @@
 import { classNames } from '@/lib/classNames';
 import cls from './CategoryFilters.module.scss';
-import {DetailsUnion, ProductTypeLowerCase, unionDescriptionsValues} from "@/types/productsTypes";
+import {DetailsUnion, ProductTypeLowerCase} from "@/types/productsTypes";
 import {ProductTypeFiltersMap} from "@/components/CategoryFilters/consts/productTypeFiltersMap";
 import {useSelector} from "react-redux";
 import {
@@ -10,8 +10,6 @@ import {CheckboxFilter} from "@/components/CheckboxFilter";
 import {useEffect, useState} from "react";
 import {Button} from "@/components/ui/Button";
 import {useLazySearchGoodByFilters} from "@/components/CategoryFilters/api/searchGoodByFilters";
-import {useAppDispatch} from "@/hooks/useAppDispatch";
-import {FiltersSliceActions} from "@/store/reducers/FiltersSlice";
 
 interface CategoryFiltersProps {
     className?: string;
