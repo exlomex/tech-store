@@ -1,4 +1,9 @@
-import {ProductsLabelsMap, ProductTypeLowerCase, unionDescriptionsValues} from "@/types/productsTypes";
+import {
+    ProductInterface,
+    ProductsLabelsMap,
+    ProductTypeLowerCase,
+    unionDescriptionsValues
+} from "@/types/productsTypes";
 
 export interface FiltersSliceSchema {
     phonesFilters: ProductFilters;
@@ -8,6 +13,7 @@ export interface FiltersSliceSchema {
     computersFilters: ProductFilters;
     musicSpeakersFilters: ProductFilters;
     currentGoodCategory: ProductTypeLowerCase;
+    filtredData: ProductInterface[]
 }
 
 type ProductFilters = {

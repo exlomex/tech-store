@@ -58,3 +58,8 @@ export const getFiltersStateByType = createSelector(
         }
     }
 )
+
+export const getCurrentFiltredData = createSelector(
+    getFilters,
+    (search: FiltersSliceSchema) => search.filtredData,
+);

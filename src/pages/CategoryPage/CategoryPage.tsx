@@ -14,6 +14,7 @@ import {
     navigationLineUnion,
     TranslatedCategories
 } from "@/components/NavigationLine/types/navigationLineLevels";
+import {CategoryGoodsSection} from "@/components/CategoryGoodsSection/CategoryGoodsSection";
 
 interface CategoryPageProps {
     className?: string;
@@ -25,15 +26,15 @@ export const CategoryPage = (props: CategoryPageProps) => {
     const dispatch = useAppDispatch()
 
     const [searchParams] = useSearchParams();
-    const catagoryType = searchParams.get('type') as ProductTypeLowerCase;
+    const categoryType = searchParams.get('type') as ProductTypeLowerCase;
 
-    const translatedCurrentCategory = TranslatedCategories[catagoryType] as navigationLineUnion
+    const translatedCurrentCategory = TranslatedCategories[categoryType] as navigationLineUnion
 
     useEffect(() => {
-        dispatch(FiltersSliceActions.setCurrentGoodCategory(catagoryType))
+        dispatch(FiltersSliceActions.setCurrentGoodCategory(categoryType))
         dispatch(FiltersSliceActions.clearAllFilters())
 
-    }, [dispatch, catagoryType]);
+    }, [dispatch, categoryType]);
 
     return (
         <div className={classNames(cls.CategoryPage, {}, [className])}>
@@ -41,7 +42,8 @@ export const CategoryPage = (props: CategoryPageProps) => {
             <MainContainer>
                 <NavigationLine currentPath={translatedCurrentCategory} previousPaths={['Главная']}/>
                 <div className={cls.CategoryPageInner}>
-                    <CategoryFilters categoryType={catagoryType}/>
+                    <CategoryFilters categoryType={categoryType}/>
+                    <CategoryGoodsSection categoryType={categoryType}/>
                 </div>
             </MainContainer>
         </div>

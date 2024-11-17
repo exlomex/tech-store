@@ -10,6 +10,8 @@ import {CheckboxFilter} from "@/components/CheckboxFilter";
 import {useEffect, useState} from "react";
 import {Button} from "@/components/ui/Button";
 import {useLazySearchGoodByFilters} from "@/components/CategoryFilters/api/searchGoodByFilters";
+import {FiltersSliceActions} from "@/store/reducers/FiltersSlice";
+import {useAppDispatch} from "@/hooks/useAppDispatch";
 
 interface CategoryFiltersProps {
     className?: string;
@@ -23,9 +25,10 @@ export const CategoryFilters = (props: CategoryFiltersProps) => {
     const currentTypeFilters = ProductTypeFiltersMap[categoryType]
 
     const [isShowAllFilters, setIsShowAllFilters] = useState(false)
-    const [SearchTrigger, {isFetching}] = useLazySearchGoodByFilters()
+    const [SearchTrigger, {isFetching, data: filtredData}] = useLazySearchGoodByFilters()
 
     const currentTypeState = useSelector(getFiltersStateByType)
+    const dispatch = useAppDispatch()
     const onFilterSubmitHandler = () => {
         const filteredState = Object.keys(currentTypeState).reduce((acc, key) => {
             const typedKey = key as keyof typeof currentTypeState;
@@ -38,6 +41,10 @@ export const CategoryFilters = (props: CategoryFiltersProps) => {
 
         SearchTrigger({filters: FiltersBody, type: categoryType })
     }
+
+    useEffect(() => {
+        if (filtredData) dispatch(FiltersSliceActions.setCurrentFiltredData(filtredData));
+    }, [dispatch, filtredData]);
 
     return (
         <div className={classNames(cls.CategoryFilters, {}, [className])}>

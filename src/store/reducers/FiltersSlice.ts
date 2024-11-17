@@ -4,7 +4,12 @@ import {USER_ACCESS_TOKEN_KEY} from "@/const/localStorage";
 import {jwtDecode} from "jwt-decode";
 import {UserData} from "../services/loginByUsername";
 import {FiltersSliceSchema} from "@/store/reducers/FiltersSliceSchema";
-import {ProductsLabelsMap, ProductTypeLowerCase, unionDescriptionsValues} from "@/types/productsTypes";
+import {
+    ProductInterface,
+    ProductsLabelsMap,
+    ProductTypeLowerCase,
+    unionDescriptionsValues
+} from "@/types/productsTypes";
 
 
 const initialState: FiltersSliceSchema = {
@@ -14,13 +19,17 @@ const initialState: FiltersSliceSchema = {
     phonesFilters: {},
     tabletsFilters: {},
     musicSpeakersFilters: {},
-    currentGoodCategory: 'phones'
+    currentGoodCategory: 'phones',
+    filtredData: []
 };
 
 export const FiltersSlice = createSlice({
     name: 'filters',
     initialState,
     reducers: {
+        setCurrentFiltredData: (state: FiltersSliceSchema, action: PayloadAction<ProductInterface[]>) => {
+            state.filtredData = action.payload;
+        },
         clearAllFilters: (state: FiltersSliceSchema) => {
             state.computersFilters = {};
             state.tabletsFilters = {};

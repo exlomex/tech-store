@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 import {getUserAuth, getUserCartIdByGoodId} from "@/store/selectors/getUserValues";
 import {useGoodButtonHandler} from "@/hooks/useButtonClickHandler";
 
-enum CardTypes {
+export enum CardTypes {
     VERTICAL_CARD = 'verticalCard',
     HORIZONTAL_CARD = 'horizontalCard',
 }
@@ -52,9 +52,16 @@ export const GoodCard = (props: GoodCardProps) => {
         // horizontal card
         return (
             <div className={classNames(cls.Card, {}, [className, typesClasses[cardType]])}>
-                <p>{title}</p>
-                <p>{price}</p>
-                <img src={image} alt="non"/>
+                <Link to={`/goods/${id}`} className={cls.CardInfoWrapper}>
+                    {image ? <img className={cls.CardImage} src={image} alt={`${title} image`}/> : <div className={classNames(cls.CardImage, {}, [cls.CardWithoutImage])}></div>}
+                    <div>
+                        <p className={cls.CardTitle}>{title}</p>
+                        <div>
+                            <Button onClick={onGoodButtonClickHandler(isGoodInCartByIds, id, cartIdByGoodId)} fullWidth={true} disabled={!isAuth}>{isGoodInCartByIds ? 'Удалить из корзины' : 'В корзину'}</Button>
+                            <p className={cls.CardPrice}>{price} ₽</p>
+                        </div>
+                    </div>
+                </Link>
             </div>
         )
     }
