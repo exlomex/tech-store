@@ -1,4 +1,5 @@
 import {JwtPayload} from "jwt-decode";
+import {cartItem} from "@/components/Header/api/fetchCartItems";
 
 export enum UserRoles {
     ADMIN =  'ADMIN',
@@ -17,6 +18,7 @@ export interface UserSliceSchema {
     modalIsOpen: boolean;
     modalType?: UserModalType;
     searchIsOpen: boolean;
+    cartItems: cartItem[]
 }
 
 export interface tokenInfoTypes extends JwtPayload {

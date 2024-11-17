@@ -1,7 +1,6 @@
 import {createSelector} from "@reduxjs/toolkit";
 import {getUser} from "./getUser";
 import {UserSliceSchema} from "@/store/reducers/UserSliceSchema";
-
 export const getUserAuth = createSelector(
     getUser,
     (search: UserSliceSchema) => search.isAuth,
@@ -25,4 +24,22 @@ export const getUserRole = createSelector(
 export const getUserSearchIsOpen = createSelector(
     getUser,
     (search: UserSliceSchema) => search.searchIsOpen,
+);
+
+export const getUserCartIds = createSelector(
+    getUser,
+    (user: UserSliceSchema) => {
+        const userCartIds: number[] = []
+        user.cartItems.forEach(cartItem => userCartIds.push(cartItem.good.id))
+        return userCartIds;
+    },
+);
+
+export const getUserCartIdByGoodId = (id: number) => createSelector(
+    getUser,
+    (user: UserSliceSchema) => {
+        let cartId = -1;
+        user.cartItems.forEach(cartItem => cartItem.good.id === id ? cartId = cartItem.id : null)
+        return cartId;
+    },
 );

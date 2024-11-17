@@ -7,14 +7,14 @@ import {ReactComponent as CardSvg} from '@/assets/cardIcon.svg'
 import {ReactComponent as ProfileSvg} from '@/assets/profileIcon.svg'
 import {SearchGood} from "@/components/SearchGood";
 import {DropDown, DropdownItem} from "@/components/ui/DropDown";
-import {useMemo, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {ReactComponent as LoginSvg} from "@/assets/loginIcon.svg";
 import {ReactComponent as RegisterIcon} from "@/assets/registerIcon.svg";
 import {useAppDispatch} from "@/hooks/useAppDispatch";
 import {UserSliceActions} from "@/store/reducers/UserSlice";
 import {UserModalType, UserRoles} from "@/store/reducers/UserSliceSchema";
 import {useSelector} from "react-redux";
-import {getUserRole} from "@/store/selectors/getUserValues";
+import {getUserAuth, getUserCartIds, getUserRole} from "@/store/selectors/getUserValues";
 import {GoodCategories} from "@/types/productsTypes";
 import {ReactComponent as LaptopIcon} from '@/assets/categories/icons/LaptopIcon.svg'
 import {ReactComponent as TvIcon} from '@/assets/categories/icons/TvIcon.svg'
@@ -23,6 +23,7 @@ import {ReactComponent as ComputerIcon} from '@/assets/categories/icons/Computer
 import {ReactComponent as TabletIcon} from '@/assets/categories/icons/TabletIcon.svg'
 import {ReactComponent as MusicSpeaker} from '@/assets/categories/icons/MusicSpeaker.svg'
 import {Link} from "react-router-dom";
+import {useLazyFetchCartItems} from "@/components/Header/api/fetchCartItems";
 
 interface HeaderProps {
     className?: string;
@@ -62,6 +63,7 @@ export const Header = (props: HeaderProps) => {
         {content: 'Панель управления', to: '/admin'},
         {content: 'Выйти', onClick: () => {
                 dispatch(UserSliceActions.logout())
+                dispatch(UserSliceActions.clearCartItems())
             }},
     ]
 
@@ -134,6 +136,24 @@ export const Header = (props: HeaderProps) => {
     const [isCatalogDropDownActive, setIsCatalogDropDownActive] = useState(false)
     const [isProfileDropDownActive, setIsProfileDropDownActive] = useState(false)
 
+    const [fetchCartItems, {data: cartItems}] = useLazyFetchCartItems()
+
+    const isAuth = useSelector(getUserAuth)
+
+    useEffect(() => {
+        if (isAuth) {
+            fetchCartItems(null)
+        }
+    }, [isAuth, fetchCartItems]);
+
+    useEffect(() => {
+        if (cartItems) {
+            dispatch(UserSliceActions.setCartItems(cartItems))
+        }
+    }, [cartItems, dispatch]);
+
+    const CartItemsFromState = useSelector(getUserCartIds)
+
     return (
         <div className={classNames(cls.Header, {}, [className])}>
         <MainContainer>
@@ -151,7 +171,10 @@ export const Header = (props: HeaderProps) => {
                             onClose={setIsCatalogDropDownActive}
                         />
                         <a className={cls.nav_item}>
-                            <CardSvg/>
+                            <div className={cls.CartWrapper}>
+                                {CartItemsFromState.length > 0 && <span>{CartItemsFromState.length}</span>}
+                                <CardSvg/>
+                            </div>
                             <p className={cls.nav_title}>Корзина</p>
                         </a>
                         <DropDown

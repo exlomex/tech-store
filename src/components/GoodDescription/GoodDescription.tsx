@@ -5,6 +5,9 @@ import {useFetchGoodById} from "@/components/GoodDescription/api/fetchGoodById";
 import {MainContainer} from "@/components/MainContainer";
 import {Button} from "@/components/ui/Button";
 import {renderProductDetailsByType} from "./lib/renderProductDetailsByType";
+import {useGoodButtonHandler} from "@/hooks/useButtonClickHandler";
+import {useSelector} from "react-redux";
+import {getUserAuth, getUserCartIdByGoodId, getUserCartIds} from "@/store/selectors/getUserValues";
 
 interface GoodDescriptionProps {
     className?: string;
@@ -17,6 +20,13 @@ export const GoodDescription = (props: GoodDescriptionProps) => {
     const {data, isLoading, error} = useFetchGoodById({id: goodId})
 
     const [isShowAllDetails, setIsShowAllDetails] = useState(false)
+
+    const cartIds = useSelector(getUserCartIds)
+    const isGoodInCartByIds = cartIds.includes(goodId)
+    const isAuth = useSelector(getUserAuth)
+    const cartIdByGoodId = useSelector(getUserCartIdByGoodId(goodId))
+
+    const {onGoodButtonClickHandler} = useGoodButtonHandler()
 
     if (!data) return (
         <></>
@@ -49,7 +59,7 @@ export const GoodDescription = (props: GoodDescriptionProps) => {
 
                     <div className={cls.GoodDescriptionRightBox}>
                         <p className={cls.GoodDescriptionPrice}>{data.price} ₽</p>
-                        <Button className={cls.GoodDescriptionButton}>В корзину</Button>
+                        <Button onClick={onGoodButtonClickHandler(isGoodInCartByIds, goodId, cartIdByGoodId)} disabled={!isAuth}>{isGoodInCartByIds ? 'Удалить из корзины' : 'В корзину'}</Button>
                     </div>
                 </div>
             </MainContainer>

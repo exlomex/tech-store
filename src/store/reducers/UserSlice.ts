@@ -3,13 +3,15 @@ import {tokenInfoTypes, UserModalType, UserRoles, UserSliceSchema} from "./UserS
 import {USER_ACCESS_TOKEN_KEY} from "@/const/localStorage";
 import {jwtDecode} from "jwt-decode";
 import {UserData} from "../services/loginByUsername";
+import {cartItem} from "@/components/Header/api/fetchCartItems";
 
 
 const initialState: UserSliceSchema = {
     isAuth: false,
     role: UserRoles.GUEST,
     modalIsOpen: false,
-    searchIsOpen: false
+    searchIsOpen: false,
+    cartItems: []
 };
 
 export const UserSlice = createSlice({
@@ -47,6 +49,12 @@ export const UserSlice = createSlice({
         },
         setSearchIsOpen: (state: UserSliceSchema, action: PayloadAction<boolean>) => {
             state.searchIsOpen = action.payload;
+        },
+        setCartItems: (state: UserSliceSchema, action: PayloadAction<cartItem[]>) => {
+            state.cartItems = action.payload;
+        },
+        clearCartItems: (state: UserSliceSchema) => {
+            state.cartItems = []
         },
     },
 });
