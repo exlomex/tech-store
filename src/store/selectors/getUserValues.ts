@@ -48,3 +48,16 @@ export const getUserActiveCartCheckboxes = createSelector(
     getUser,
     (user: UserSliceSchema) => user.activeCartCheckboxes
 );
+
+export const getUserIsAllCartCheckboxesActive = createSelector(
+    getUser,
+    (user: UserSliceSchema) => {
+        const totalOfActiveCheckboxes = Object.keys(user.activeCartCheckboxes)
+            .reduce((acc, currentValue) => {
+                if (user.activeCartCheckboxes[+currentValue]) return acc += 1;
+                return acc
+            }, 0)
+
+        return totalOfActiveCheckboxes === user.cartItems.length;
+    }
+);

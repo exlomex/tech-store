@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 import {CartGoodCard} from "@/components/CartGoodCard";
 import {useDeleteGoodFromCart} from "@/components/ui/GoodCard/api/cartApi";
 import {useSelector} from "react-redux";
-import {getUserActiveCartCheckboxes} from "@/store/selectors/getUserValues";
+import {getUserActiveCartCheckboxes, getUserIsAllCartCheckboxesActive} from "@/store/selectors/getUserValues";
 import {ReactComponent as TrashSvg} from "@/assets/trashIcon.svg";
 import {CheckBox} from "@/components/ui/CheckBox";
 import {useAppDispatch} from "@/hooks/useAppDispatch";
@@ -22,7 +22,8 @@ export const CartDescription = (props: CartDescriptionProps) => {
 
     const {data: currentCartItems, isLoading} = useFetchCartItems(null)
 
-    const [deleteGood, {}] = useDeleteGoodFromCart();
+    const [deleteGood] = useDeleteGoodFromCart();
+
     const activeCartCheckboxes = useSelector(getUserActiveCartCheckboxes)
     const onMultiplyTrashButtonClickHandler = () => {
         const deleteIds: number[] = []
@@ -36,13 +37,17 @@ export const CartDescription = (props: CartDescriptionProps) => {
         dispatch(UserSliceActions.toggleAllActiveCartCheckboxes())
     }
 
+    const isAllCartCheckboxesActive = useSelector(getUserIsAllCartCheckboxesActive)
+
     if (isLoading) {
         return <></>
     }
 
-    const totalPrice = (currentCartItems: cartItem[]) => {
+    const totalPrice = (currentCartItems: cartItem[], activeCartCheckboxes: Record<number, boolean>) => {
         let totalPrice = 0;
-        currentCartItems.forEach(cartItem => totalPrice += cartItem.good.price);
+        currentCartItems.forEach(cartItem => {
+            if (activeCartCheckboxes[cartItem.id]) totalPrice += cartItem.good.price
+        });
         return totalPrice;
     }
 
@@ -61,7 +66,7 @@ export const CartDescription = (props: CartDescriptionProps) => {
         <section className={classNames(cls.CartDescription, {}, [className])}>
             <div className={cls.CartDescriptionUpperLine}>
                 <div onClick={onMultiplyTrashButtonClickHandler} className={cls.RemoveButton}><TrashSvg/><span>Удалить</span></div>
-                <div onClick={onMultiplyCheckboxClickHandler} className={cls.SelectAllCheckbox}><span>Выбрать все</span><CheckBox isChecked={true} onChange={() => {}}/></div>
+                <div onClick={onMultiplyCheckboxClickHandler} className={cls.SelectAllCheckbox}><span>Выбрать все</span><CheckBox isChecked={isAllCartCheckboxesActive} onChange={() => {}}/></div>
             </div>
 
             <div className={cls.CartItems}>
@@ -70,7 +75,7 @@ export const CartDescription = (props: CartDescriptionProps) => {
                 )}
             </div>
 
-            <div className={cls.TotalPrice}>Итого {totalPrice(currentCartItems || [])} ₽</div>
+            <div className={cls.TotalPrice}>Итого {totalPrice(currentCartItems || [], activeCartCheckboxes)} ₽</div>
             <Button>оформить заказ</Button>
         </section>
     )
