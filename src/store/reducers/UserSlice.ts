@@ -4,6 +4,7 @@ import {USER_ACCESS_TOKEN_KEY} from "@/const/localStorage";
 import {jwtDecode} from "jwt-decode";
 import {UserData} from "../services/loginByUsername";
 import {cartItem} from "@/components/Header/api/fetchCartItems";
+import {OrderInterface} from "@/components/CartDescription/api/createOrderApi";
 
 
 const initialState: UserSliceSchema = {
@@ -75,6 +76,7 @@ export const UserSlice = createSlice({
             if (totalOfActiveCheckboxes === state.cartItems.length) {state.activeCartCheckboxes = []}
             else {state.cartItems.forEach(cartItem => state.activeCartCheckboxes[cartItem.id] = true)}
         },
+        setLastOrderDetails: (state: UserSliceSchema, action: PayloadAction<OrderInterface>) => {state.lastOrderDetails = action.payload}
     },
 });
 

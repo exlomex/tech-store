@@ -54,6 +54,7 @@ export const Header = (props: HeaderProps) => {
     ], [cls.ItemsDropDown, cls.ItemSvgWrapper]);
 
     const AuthorizationUserItems: DropdownItem[] = [
+        {content: 'Мои заказы', to: '/orders'},
         {content: 'Выйти', onClick: () => {
                 dispatch(UserSliceActions.logout())
             }}
@@ -61,6 +62,7 @@ export const Header = (props: HeaderProps) => {
 
     const AuthorizationAdminItems: DropdownItem[] = [
         {content: 'Панель управления', to: '/admin'},
+        {content: 'Мои заказы', to: '/orders'},
         {content: 'Выйти', onClick: () => {
                 dispatch(UserSliceActions.logout())
                 dispatch(UserSliceActions.clearCartItems())

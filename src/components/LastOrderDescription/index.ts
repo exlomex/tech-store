@@ -1,0 +1,1 @@
+export {LastOrderDescription} from './LastOrderDescription'

@@ -3,7 +3,7 @@ import {USER_ACCESS_TOKEN_KEY} from "@/const/localStorage";
 import {StateSchema} from "@/store/config";
 
 export const rtkApi = createApi({
-    tagTypes: ['Review', 'Goods', 'Cart'],
+    tagTypes: ['Review', 'Goods', 'Cart', 'Orders'],
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://bbaco92isfvukfbtqvrh.containers.yandexcloud.net',

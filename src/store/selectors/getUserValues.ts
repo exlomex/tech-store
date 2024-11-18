@@ -49,6 +49,17 @@ export const getUserActiveCartCheckboxes = createSelector(
     (user: UserSliceSchema) => user.activeCartCheckboxes
 );
 
+export const getUserActiveCartCheckboxesArray = createSelector(
+    getUser,
+    (user: UserSliceSchema) => {
+        const activeIdsArray: number[] = []
+        Object.keys(user.activeCartCheckboxes).forEach(key => {
+            if (user.activeCartCheckboxes[+key]) activeIdsArray.push(+key)
+        })
+        return activeIdsArray;
+    }
+);
+
 export const getUserIsAllCartCheckboxesActive = createSelector(
     getUser,
     (user: UserSliceSchema) => {
@@ -60,4 +71,9 @@ export const getUserIsAllCartCheckboxesActive = createSelector(
 
         return totalOfActiveCheckboxes === user.cartItems.length;
     }
+);
+
+export const getUserLastOrder = createSelector(
+    getUser,
+    (user: UserSliceSchema) => user.lastOrderDetails
 );

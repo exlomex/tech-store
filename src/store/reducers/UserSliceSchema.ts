@@ -1,5 +1,6 @@
 import {JwtPayload} from "jwt-decode";
 import {cartItem} from "@/components/Header/api/fetchCartItems";
+import {OrderInterface} from "@/components/CartDescription/api/createOrderApi";
 
 export enum UserRoles {
     ADMIN =  'ADMIN',
@@ -20,6 +21,7 @@ export interface UserSliceSchema {
     searchIsOpen: boolean;
     cartItems: cartItem[]
     activeCartCheckboxes: Record<number, boolean>;
+    lastOrderDetails?: OrderInterface;
 }
 
 export interface tokenInfoTypes extends JwtPayload {

@@ -3,16 +3,21 @@ import cls from './CartDescription.module.scss';
 import {Button} from "@/components/ui/Button";
 import {cartItem, useFetchCartItems} from "@/components/Header/api/fetchCartItems";
 import {ReactComponent as EmptyCartIcon} from "@/assets/cartEmptyBasket.svg";
-import React from "react";
-import {Link} from "react-router-dom";
+import React, {useEffect} from "react";
+import {Link, useNavigate} from "react-router-dom";
 import {CartGoodCard} from "@/components/CartGoodCard";
 import {useDeleteGoodFromCart} from "@/components/ui/GoodCard/api/cartApi";
 import {useSelector} from "react-redux";
-import {getUserActiveCartCheckboxes, getUserIsAllCartCheckboxesActive} from "@/store/selectors/getUserValues";
+import {
+    getUserActiveCartCheckboxes,
+    getUserActiveCartCheckboxesArray,
+    getUserIsAllCartCheckboxesActive
+} from "@/store/selectors/getUserValues";
 import {ReactComponent as TrashSvg} from "@/assets/trashIcon.svg";
 import {CheckBox} from "@/components/ui/CheckBox";
 import {useAppDispatch} from "@/hooks/useAppDispatch";
 import {UserSliceActions} from "@/store/reducers/UserSlice";
+import {useCreateNewOrder} from "@/components/CartDescription/api/createOrderApi";
 interface CartDescriptionProps {
     className?: string;
 }
@@ -24,13 +29,10 @@ export const CartDescription = (props: CartDescriptionProps) => {
 
     const [deleteGood] = useDeleteGoodFromCart();
 
+    const activeCartCheckboxesArray = useSelector(getUserActiveCartCheckboxesArray)
     const activeCartCheckboxes = useSelector(getUserActiveCartCheckboxes)
     const onMultiplyTrashButtonClickHandler = () => {
-        const deleteIds: number[] = []
-        Object.keys(activeCartCheckboxes).forEach(key => {
-            if (activeCartCheckboxes[+key]) deleteIds.push(+key)
-        })
-        deleteGood({ids: deleteIds})
+        deleteGood({ids: activeCartCheckboxesArray})
     };
     const dispatch = useAppDispatch()
     const onMultiplyCheckboxClickHandler = () => {
@@ -38,6 +40,23 @@ export const CartDescription = (props: CartDescriptionProps) => {
     }
 
     const isAllCartCheckboxesActive = useSelector(getUserIsAllCartCheckboxesActive)
+
+    const [createNewOrder, {data: orderData}] = useCreateNewOrder()
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        orderData && dispatch(UserSliceActions.setLastOrderDetails(orderData))
+    }, [orderData]);
+    const onPurchaseButtonClickHandler = async () => {
+        try {
+            await createNewOrder({ids: activeCartCheckboxesArray})
+            navigate('/order')
+        } catch (e) {
+            console.error('Ошибка при создании заказа:', e);
+            throw new Error()
+        }
+    }
 
     if (isLoading) {
         return <></>
@@ -76,7 +95,7 @@ export const CartDescription = (props: CartDescriptionProps) => {
             </div>
 
             <div className={cls.TotalPrice}>Итого {totalPrice(currentCartItems || [], activeCartCheckboxes)} ₽</div>
-            <Button>оформить заказ</Button>
+            <Button onClick={onPurchaseButtonClickHandler}>Оформить заказ</Button>
         </section>
     )
 };
