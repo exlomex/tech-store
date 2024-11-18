@@ -8,7 +8,7 @@ export const useGoodButtonHandler = () => {
         if (!isGoodInCartByIds) {
             addGoodIntoCart({ goodId: id });
         } else if (cartIdByGoodId !== -1) {
-            removeGoodFromCart({ cartId: cartIdByGoodId });
+            removeGoodFromCart({ids: [cartIdByGoodId]});
         }
     };
 

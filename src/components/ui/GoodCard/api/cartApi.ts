@@ -13,10 +13,11 @@ const cartApi = rtkApi.injectEndpoints({
             }),
             invalidatesTags: ['Cart'],
         }),
-        deleteGoodFromCart: build.mutation<null, {cartId: number}>({
+        deleteGoodFromCart: build.mutation<null, {ids: number[]}>({
             query: (body) => ({
-                url: `/cart/decrease/${body.cartId}`,
-                method: 'PATCH',
+                url: `/cart`,
+                method: 'DELETE',
+                body: body
             }),
             invalidatesTags: ['Cart'],
         }),

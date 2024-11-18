@@ -170,13 +170,13 @@ export const Header = (props: HeaderProps) => {
                             isActive={isCatalogDropDownActive}
                             onClose={setIsCatalogDropDownActive}
                         />
-                        <a className={cls.nav_item}>
+                        <Link to={'/cart'} className={cls.nav_item}>
                             <div className={cls.CartWrapper}>
                                 {CartItemsFromState.length > 0 && <span>{CartItemsFromState.length}</span>}
                                 <CardSvg/>
                             </div>
                             <p className={cls.nav_title}>Корзина</p>
-                        </a>
+                        </Link>
                         <DropDown
                             items={currentItemByRole([NonAuthorizationItems, AuthorizationUserItems, AuthorizationAdminItems], role)}
                             trigger={<ProfileTrigger/>}

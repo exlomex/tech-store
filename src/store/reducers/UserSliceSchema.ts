@@ -19,6 +19,7 @@ export interface UserSliceSchema {
     modalType?: UserModalType;
     searchIsOpen: boolean;
     cartItems: cartItem[]
+    activeCartCheckboxes: Record<number, boolean>;
 }
 
 export interface tokenInfoTypes extends JwtPayload {

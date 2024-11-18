@@ -6,21 +6,18 @@ import {Navigate, useLocation} from "react-router-dom";
 
 interface RequireAuthProps {
     children: ReactNode;
-    role: UserRoles;
+    roles: UserRoles[];
 }
 
 export const RequireAuth = (props: RequireAuthProps) => {
-    const { role, children } = props;
+    const { roles, children } = props;
 
     const isAuth = useSelector(getUserAuth)
     const CurrentUserRole = useSelector(getUserRole)
     const location = useLocation()
 
-    useEffect(() => {
-        console.log(isAuth);
-    }, []);
+    if (!isAuth || !(roles.includes(CurrentUserRole))) {
 
-    if (!isAuth && CurrentUserRole !== role) {
         return (
             <Navigate to={'/'} state={{ from: location }} replace/>
         )

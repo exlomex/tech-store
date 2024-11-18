@@ -43,3 +43,8 @@ export const getUserCartIdByGoodId = (id: number) => createSelector(
         return cartId;
     },
 );
+
+export const getUserActiveCartCheckboxes = createSelector(
+    getUser,
+    (user: UserSliceSchema) => user.activeCartCheckboxes
+);

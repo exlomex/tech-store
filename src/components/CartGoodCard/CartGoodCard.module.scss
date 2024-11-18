@@ -1,0 +1,87 @@
+.CartGoodCard {
+    border-bottom: 1px solid var(--light-blue);
+
+    display: flex;
+    padding: 25px 0;
+    gap: 0 25px;
+
+    .GoodCardImageContainer {
+        display: flex;
+        gap: 0 25px;
+        flex-direction: column;
+
+        .GoodCardImage {
+            border-radius: 8px;
+            object-fit: cover;
+            height: 100px;
+            width: 76px;
+        }
+
+        div.GoodCardImage {
+            background-color: var(--grey);
+        }
+    }
+
+    .GoodCardContentContainer {
+        width: 100%;
+
+        .ContentUpperContainer {
+            display: flex;
+            justify-content: space-between;
+            .ContentGoodDescription {
+                .ContentTitle {
+                    font-size: 1em;
+                    font-weight: 400;
+                    margin-bottom: 11px;
+                }
+
+                .ContentPrice {
+                    font-size: 1.111em;
+                }
+            }
+        }
+
+        .ContentBottomContainer {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 0 15px;
+
+            .DeleteButton {
+                cursor: pointer;
+            }
+
+            .Counter {
+                padding: 0 12px;
+                border-radius: 4px;
+                border: 1px solid var(--purple);
+                width: 100px;
+                height: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .CounterSvg {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 15px;
+                    aspect-ratio: 1 / 1;
+                    cursor: pointer;
+
+                    &.disabled {
+                        svg path {
+                            stroke: var(--light-grey);
+                        }
+                        pointer-events: none;
+                    }
+                }
+
+                .CounterCount {
+                    font-size: 0.889em;
+                }
+            }
+        }
+    }
+}
