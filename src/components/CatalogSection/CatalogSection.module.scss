@@ -1,6 +1,4 @@
 .CatalogSection {
-    margin-top: 110px;
-
     .CatalogSectionInner {
 
         .CatalogTitle {
@@ -61,4 +59,24 @@
         }
     }
 
+}
+
+@media screen and (max-width: 768px) {
+    .CatalogSection {
+        .CatalogSectionInner {
+            .CatalogCategories {
+                .CategoryItemWrapper {
+                    .CategoryItemImageWrapper {
+                        width: 150px;
+                        height: 170px;
+
+                        img {
+                            max-height: 70%;
+                            max-width: 85%;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

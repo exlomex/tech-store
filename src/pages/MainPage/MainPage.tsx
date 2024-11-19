@@ -3,15 +3,8 @@ import cls from './MainPage.module.scss';
 import {Header} from "@/components/Header";
 import {CatalogSection} from "@/components/CatalogSection";
 import {AllGoodsSection} from "@/components/AllGoodsSection";
-import {Modal} from "@/components/ui/Modal";
-import {useState} from "react";
-import {useSelector} from "react-redux";
-import {getUserIsModalOpen, getUserModalType} from "@/store/selectors/getUserValues";
-import {useAppDispatch} from "@/hooks/useAppDispatch";
-import {UserSliceActions} from "@/store/reducers/UserSlice";
-import {UserModalType} from "@/store/reducers/UserSliceSchema";
-import {LoginForm} from "@/components/LoginForm";
-import {RegisterForm} from "@/components/RegisterForm";
+import {useMediaQuery} from "react-responsive";
+import {MobileNavigation} from "@/components/MobileNavigation";
 
 interface MainPageProps {
     className?: string;
@@ -20,8 +13,12 @@ interface MainPageProps {
 export const MainPage = (props: MainPageProps) => {
     const { className } = props;
 
+    // MEDIA
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
+
     return (
         <div className={classNames(cls.MainPage, {}, [className])}>
+            {isTabletOrMobile && <MobileNavigation/>}
             <Header/>
             <CatalogSection/>
             <AllGoodsSection/>

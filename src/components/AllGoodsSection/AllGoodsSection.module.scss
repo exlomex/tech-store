@@ -19,3 +19,14 @@
         }
     }
 }
+
+@media screen and (max-width: 768px) {
+    .AllGoodsSection {
+        .AllGoodsInner {
+            .CardsWrapper {
+                gap: 20px 12px;
+                justify-content: space-around;
+            }
+        }
+    }
+}

@@ -32,3 +32,17 @@
         }
     }
 }
+
+@media screen and (max-width: 768px) {
+    .Modal {
+        .ModalInner {
+            .ModalContent {
+                max-height: 90%;
+                padding-left: 30px;
+                padding-right: 30px;
+                overflow: auto;
+            }
+        }
+    }
+
+}

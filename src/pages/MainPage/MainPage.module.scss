@@ -1,0 +1,13 @@
+.MainPage {
+    margin-top: 110px;
+}
+
+@media screen and (max-width: 768px) {
+    .MainPage > section:nth-child(3) {
+        margin-top: 140px;
+    }
+
+    .MainPage > section:last-child {
+        margin-bottom: 100px;
+    }
+}

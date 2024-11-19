@@ -17,6 +17,8 @@ interface DropDownProps {
     isActive: boolean;
     onClose: Dispatch<SetStateAction<boolean>>
     text?: string;
+    isMobile?: boolean;
+    topLeftAnchor?: boolean;
 }
 
 export const DropDown = memo((props: DropDownProps) => {
@@ -26,7 +28,9 @@ export const DropDown = memo((props: DropDownProps) => {
         items,
         isActive,
         onClose,
-        text
+        text,
+        isMobile = false,
+        topLeftAnchor
     } = props;
 
     return (
@@ -34,7 +38,7 @@ export const DropDown = memo((props: DropDownProps) => {
                 onMouseLeave={() => onClose(false)}
             >
                 {trigger}
-                <div className={classNames(cls.DropDownWrapper, {[cls.MenuOpen]: isActive}, [])}>
+                <div className={classNames(cls.DropDownWrapper, {[cls.MenuOpen]: isActive, [cls.mobileWrapper]: isMobile, [cls.topLeftAnchor]: topLeftAnchor}, [])}>
                     <div className={cls.DropDownInner}>
                         {text && <div className={cls.DropDownTitle}>{text}</div>}
 
