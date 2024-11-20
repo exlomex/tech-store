@@ -8,6 +8,7 @@ import {renderProductDetailsByType} from "./lib/renderProductDetailsByType";
 import {useGoodButtonHandler} from "@/hooks/useButtonClickHandler";
 import {useSelector} from "react-redux";
 import {getUserAuth, getUserCartIdByGoodId, getUserCartIds} from "@/store/selectors/getUserValues";
+import {useMediaQuery} from "react-responsive";
 
 interface GoodDescriptionProps {
     className?: string;
@@ -28,12 +29,14 @@ export const GoodDescription = (props: GoodDescriptionProps) => {
 
     const {onGoodButtonClickHandler} = useGoodButtonHandler()
 
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
+
     if (!data) return (
         <></>
     )
 
     return (
-        <section className={classNames(cls.GoodDescription, {}, [className])}>
+        <section className={classNames(cls.GoodDescription, {[cls.MobileDescription]: isTabletOrMobile}, [className])}>
             <MainContainer>
                 <div className={cls.GoodDescriptionInner}>
                     {data.image ?
@@ -41,7 +44,7 @@ export const GoodDescription = (props: GoodDescriptionProps) => {
                         <div className={classNames(cls.GoodImage, {}, [cls.GoodWithoutImage])}></div>
                     }
 
-                    <div className={cls.GoodDescriptionContent}>
+                    <div className={classNames(cls.GoodDescriptionContent, {}, [])}>
                         <p className={cls.GoodDescriptionTitle}>{data.title}</p>
 
                         <div className={classNames(cls.GoodDetailsWrapper, {[cls.IsShowAllDetails]: isShowAllDetails}, [])}>

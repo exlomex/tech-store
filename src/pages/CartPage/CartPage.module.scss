@@ -1,3 +1,11 @@
 .CartPage {
     margin-top: 110px;
 }
+
+
+@media screen and (max-width: 768px) {
+    .CartPage {
+        margin-top: 140px;
+        margin-bottom: 80px;
+    }
+}

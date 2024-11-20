@@ -51,7 +51,7 @@ export const CategoryPage = (props: CategoryPageProps) => {
     return (
         <div className={classNames(cls.CategoryPage, {}, [className])}>
             <Header/>
-            {isTabletOrMobile && <MobileNavigation/>}
+            {isTabletOrMobile && !isMobileFiltersOpen && <MobileNavigation/>}
             <MainContainer>
                 <NavigationLine currentPath={translatedCurrentCategory} previousPaths={['Главная']} isMobile={isTabletOrMobile}/>
                 <div className={cls.CategoryPageInner}>

@@ -1,6 +1,21 @@
 .GoodReviews {
     margin-top: 40px;
 
+    &.GoodReviewMobile {
+        .GoodReviewsInner {
+            .GoodReviewCount {
+                font-size: 1em;
+            }
+
+            .GoodReviewRating {
+                .GoodReviewRatingTitle {
+                    font-size: 0.889em;
+                }
+
+            }
+        }
+    }
+
     .GoodReviewsInner {
 
         .GoodReviewsTitle {

@@ -14,6 +14,7 @@ import {Button} from "@/components/ui/Button";
 import {useSelector} from "react-redux";
 import {getUserAuth} from "@/store/selectors/getUserValues";
 import {reviewBody, useAddNewReview} from "@/components/GoodReviews/api/AddReviewApi";
+import {useMediaQuery} from "react-responsive";
 
 interface GoodReviewsProps {
     className?: string;
@@ -61,14 +62,18 @@ export const GoodReviews = (props: GoodReviewsProps) => {
         setRating(rate)
     }
 
+    const isTabletOrMobile = useMediaQuery({query: '(max-width: 768px)'})
     const isAuth = useSelector(getUserAuth)
 
-    if (!reviews) return (
-        <></>
-    )
+    if (!reviews) {
+        return (
+            <></>
+
+        )
+    }
 
     return (
-        <div className={classNames(cls.GoodReviews, {}, [className])}>
+        <section className={classNames(cls.GoodReviews, {[cls.GoodReviewMobile]: isTabletOrMobile}, [className])}>
             <MainContainer>
                 <div className={cls.GoodReviewsInner}>
                     <h3 className={cls.GoodReviewsTitle}>Отзывы</h3>
@@ -119,6 +124,6 @@ export const GoodReviews = (props: GoodReviewsProps) => {
                     </div>
                 </div>
             </MainContainer>
-        </div>
+        </section>
     )
 };

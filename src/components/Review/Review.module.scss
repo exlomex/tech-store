@@ -6,6 +6,16 @@
     background-color: var(--field);
     border: 1px solid var(--main-skeleton);
 
+    &.ReviewMobile {
+        .ReviewTopLine {
+            font-size: 0.889em;
+        }
+
+        .ReviewTitle {
+            font-size: 1em;
+        }
+    }
+
     .ReviewTopLine {
         display: flex;
         justify-content: space-between;

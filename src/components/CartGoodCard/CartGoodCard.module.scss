@@ -28,8 +28,10 @@
         .ContentUpperContainer {
             display: flex;
             justify-content: space-between;
+            gap: 0 6px;
             .ContentGoodDescription {
                 .ContentTitle {
+                    word-break: break-all;
                     font-size: 1em;
                     font-weight: 400;
                     margin-bottom: 11px;

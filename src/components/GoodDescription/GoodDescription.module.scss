@@ -1,10 +1,46 @@
 .GoodDescription {
+
+    &.MobileDescription {
+        .GoodDescriptionInner {
+            .GoodImage {
+                height: 460px;
+                width: 100%;
+                max-width: 500px;
+            }
+
+            .GoodDescriptionContent {
+                width: 100%;
+
+                .GoodDetailsWrapper {
+                    .GoodDetails {
+                        & > p {
+                            & > span:nth-child(1) {
+                                font-size: 0.778em;
+                            }
+
+                            & > span:nth-child(2) {
+                            }
+
+                            & > span:nth-child(3) {
+                                font-size: 0.889em;
+                            }
+                        }
+                    }
+
+                    .GoodDescriptionShowAll {
+                        font-size: 0.889em;
+                    }
+                }
+            }
+        }
+    }
+
     .GoodDescriptionInner {
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
-        gap: 50px 50px;
-        //flex-wrap: wrap;
+        gap: 50px 30px;
+        flex-wrap: wrap;
 
         .GoodImage {
             width: 411px;
@@ -62,7 +98,7 @@
                         }
 
                         & > span:nth-child(3) {
-                            width: 150px;
+                            max-width: 150px;
                         }
                     }
                 }
