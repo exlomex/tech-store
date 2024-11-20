@@ -14,6 +14,7 @@ const initialState: UserSliceSchema = {
     searchIsOpen: false,
     cartItems: [],
     activeCartCheckboxes: {},
+    isMobileFilterOpen: false
 };
 
 export const UserSlice = createSlice({
@@ -76,7 +77,8 @@ export const UserSlice = createSlice({
             if (totalOfActiveCheckboxes === state.cartItems.length) {state.activeCartCheckboxes = []}
             else {state.cartItems.forEach(cartItem => state.activeCartCheckboxes[cartItem.id] = true)}
         },
-        setLastOrderDetails: (state: UserSliceSchema, action: PayloadAction<OrderInterface>) => {state.lastOrderDetails = action.payload}
+        setLastOrderDetails: (state: UserSliceSchema, action: PayloadAction<OrderInterface>) => {state.lastOrderDetails = action.payload},
+        toggleMobileFilterOpen: (state: UserSliceSchema) => {state.isMobileFilterOpen = !state.isMobileFilterOpen}
     },
 });
 

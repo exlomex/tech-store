@@ -7,3 +7,17 @@
         justify-content: space-between;
     }
 }
+
+@media screen and (max-width: 768px) {
+    .CategoryPage {
+        margin-top: 140px;
+
+        .CategoryPageInner {
+            height: calc(100vh - 360px);
+        }
+    }
+
+    //.CategoryPage > section:last-child {
+    //    margin-bottom: 100px;
+    //}
+}

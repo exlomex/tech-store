@@ -1,7 +1,7 @@
 import { classNames } from '@/lib/classNames';
 import cls from './CategoryPage.module.scss';
 import { useSearchParams} from "react-router-dom";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Header} from "@/components/Header";
 import {MainContainer} from "@/components/MainContainer";
 import {CategoryFilters} from "@/components/CategoryFilters";
@@ -10,11 +10,15 @@ import {useAppDispatch} from "@/hooks/useAppDispatch";
 import {FiltersSliceActions} from "@/store/reducers/FiltersSlice";
 import {NavigationLine} from "@/components/NavigationLine";
 import {
-    navigationLineOptions,
     navigationLineUnion,
     TranslatedCategories
 } from "@/components/NavigationLine/types/navigationLineLevels";
 import {CategoryGoodsSection} from "@/components/CategoryGoodsSection/CategoryGoodsSection";
+import {useMediaQuery} from "react-responsive";
+import {MobileNavigation} from "@/components/MobileNavigation";
+import {useSelector} from "react-redux";
+import {getUserIsMobileFilterOpen} from "@/store/selectors/getUserValues";
+import {UserSliceActions} from "@/store/reducers/UserSlice";
 
 interface CategoryPageProps {
     className?: string;
@@ -36,13 +40,22 @@ export const CategoryPage = (props: CategoryPageProps) => {
 
     }, [dispatch, categoryType]);
 
+    const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
+
+    const isMobileFiltersOpen = useSelector(getUserIsMobileFilterOpen)
+
+    const onChangeMobileFiltersOpen = () => {
+        dispatch(UserSliceActions.toggleMobileFilterOpen())
+    }
+
     return (
         <div className={classNames(cls.CategoryPage, {}, [className])}>
             <Header/>
+            {isTabletOrMobile && <MobileNavigation/>}
             <MainContainer>
-                <NavigationLine currentPath={translatedCurrentCategory} previousPaths={['Главная']}/>
+                <NavigationLine currentPath={translatedCurrentCategory} previousPaths={['Главная']} isMobile={isTabletOrMobile}/>
                 <div className={cls.CategoryPageInner}>
-                    <CategoryFilters categoryType={categoryType}/>
+                    <CategoryFilters categoryType={categoryType} mobileOptions={{isMobile: isTabletOrMobile, isOpen: isMobileFiltersOpen, onChange: onChangeMobileFiltersOpen}}/>
                     <CategoryGoodsSection categoryType={categoryType}/>
                 </div>
             </MainContainer>

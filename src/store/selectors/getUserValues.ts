@@ -77,3 +77,7 @@ export const getUserLastOrder = createSelector(
     getUser,
     (user: UserSliceSchema) => user.lastOrderDetails
 );
+export const getUserIsMobileFilterOpen = createSelector(
+    getUser,
+    (user: UserSliceSchema) => user.isMobileFilterOpen
+);

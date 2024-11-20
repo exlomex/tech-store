@@ -32,5 +32,27 @@
         .NavigationLineCurrentPath {
             font-size: 1.778em;
         }
+
+        margin-bottom: 25px;
+    }
+
+    .FiltersLine {
+        display: flex;
+        justify-content: space-between;
+
+        .FiltersLineElement {
+            cursor: pointer;
+            height: 16px;
+            display: flex;
+            gap: 0 8px;
+            align-items: center;
+
+            span {
+                padding-top: 1px;
+                font-size: 0.877em;
+                font-weight: 400;
+                color: var(--dark-grey);
+            }
+        }
     }
 }

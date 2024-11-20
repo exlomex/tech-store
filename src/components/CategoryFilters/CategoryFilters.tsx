@@ -13,13 +13,19 @@ import {useLazySearchGoodByFilters} from "@/components/CategoryFilters/api/searc
 import {FiltersSliceActions} from "@/store/reducers/FiltersSlice";
 import {useAppDispatch} from "@/hooks/useAppDispatch";
 
+interface MobileOptionsI {
+    isMobile: boolean;
+    isOpen?: boolean;
+    onChange?: () => void;
+}
 interface CategoryFiltersProps {
     className?: string;
     categoryType: ProductTypeLowerCase;
+    mobileOptions?: MobileOptionsI
 }
 
 export const CategoryFilters = (props: CategoryFiltersProps) => {
-    const { className } = props;
+    const { className, mobileOptions } = props;
 
     const categoryType = useSelector(getFiltersCategory)
     const currentTypeFilters = ProductTypeFiltersMap[categoryType]
@@ -40,14 +46,20 @@ export const CategoryFilters = (props: CategoryFiltersProps) => {
         const FiltersBody = {...filteredState, type: categoryType} as Partial<DetailsUnion>
 
         SearchTrigger({filters: FiltersBody, type: categoryType })
+        mobileOptions?.onChange && mobileOptions?.onChange()
     }
 
     useEffect(() => {
         if (filtredData) dispatch(FiltersSliceActions.setCurrentFiltredData(filtredData));
     }, [dispatch, filtredData]);
 
+    const mobileMods = {
+        [cls.MobileFilters]: mobileOptions?.isMobile || false,
+        [cls.isFiltersOpen]: mobileOptions?.isOpen || false
+    }
+
     return (
-        <div className={classNames(cls.CategoryFilters, {}, [className])}>
+        <div className={classNames(cls.CategoryFilters, mobileMods, [className])}>
 
             {currentTypeFilters?.map((filter, index) => (
                 <div key={index} className={classNames('', {[cls.isFilterShows]: isShowAllFilters}, [])}>

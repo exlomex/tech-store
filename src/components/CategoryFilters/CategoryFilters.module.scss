@@ -16,7 +16,7 @@
 
 .CategoryFilters {
     padding: 15px;
-    max-height: calc(100vh - 80px - 100px);
+    height: calc(100vh - 200px);
     overflow: auto;
     width: 290px;
 
@@ -32,6 +32,22 @@
         &.isFilterShows {
             display: block;
         }
+    }
+
+    &.MobileFilters {
+        z-index: 10000;
+        position: absolute;
+        background-color: var(--white);
+        left: -100%;
+        overflow-x: scroll;
+        width: 100%;
+        transition: all .3s ease;
+        height: calc(calc(100vh - 360px));
+        box-shadow: none;
+    }
+
+    &.isFiltersOpen {
+        left: 0;
     }
 
     .CategoryFiltersIsShowAll {
