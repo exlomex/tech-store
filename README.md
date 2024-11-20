@@ -2,6 +2,8 @@
 
 Проект представляет собой SPA-приложение онлайн магазина техники.
 
+https://github.com/user-attachments/assets/cdb62eda-6bed-433f-bea1-02ff45c3fa48
+
 ## Деплой
 
 - Ссылка на tech-shop - https://tech-store-gray-zeta.vercel.app/
