@@ -2,7 +2,7 @@
 
 Проект представляет собой SPA-приложение онлайн магазина техники.
 
-https://github.com/user-attachments/assets/cdb62eda-6bed-433f-bea1-02ff45c3fa48
+https://github.com/user-attachments/assets/11196cb5-f7e0-4fba-9a5c-2ab914f6e67b
 
 ## Деплой
 
