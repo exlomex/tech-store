@@ -7,11 +7,12 @@ import {useEffect} from "react";
 import {useAppDispatch} from "@/hooks/useAppDispatch";
 import {UserSliceActions} from "@/store/reducers/UserSlice";
 import {useSelector} from "react-redux";
-import {getUserAuth, getUserCartIds} from "@/store/selectors/getUserValues";
+import {getUserAuth} from "@/store/selectors/getUserValues";
 import {Link} from "react-router-dom";
 import {useLazyFetchCartItems} from "@/components/Header/api/fetchCartItems";
 import {useMediaQuery} from "react-responsive";
 import {Navigation} from "@/components/Navigation";
+
 
 interface HeaderProps {
     className?: string;
@@ -42,6 +43,8 @@ export const Header = (props: HeaderProps) => {
         query: '(min-width: 768px)'
     })
     const isTabletOrMobile = useMediaQuery({ query: '(max-width: 768px)' })
+
+
 
     return (
         <header className={classNames(cls.Header, {}, [className])}>

@@ -13,6 +13,14 @@
         max-width: 570px;
         width: 60vw;
 
+        .LoginFormError {
+            text-align: center;
+            margin: 20px 0 10px;
+            line-height: 130%;
+            color: var(--red);
+            font-weight: 400;
+        }
+
         .InputWrapper {
             margin-bottom: 10px;
             height: 104px;

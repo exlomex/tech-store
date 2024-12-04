@@ -2,7 +2,7 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {tokenInfoTypes, UserModalType, UserRoles, UserSliceSchema} from "./UserSliceSchema";
 import {USER_ACCESS_TOKEN_KEY} from "@/const/localStorage";
 import {jwtDecode} from "jwt-decode";
-import {UserData} from "../services/loginByUsername";
+import {loginByUsername, UserData} from "../services/loginByUsername";
 import {cartItem} from "@/components/Header/api/fetchCartItems";
 import {OrderInterface} from "@/components/CartDescription/api/createOrderApi";
 
@@ -14,7 +14,8 @@ const initialState: UserSliceSchema = {
     searchIsOpen: false,
     cartItems: [],
     activeCartCheckboxes: {},
-    isMobileFilterOpen: false
+    isMobileFilterOpen: false,
+    loginIsLoading: false,
 };
 
 export const UserSlice = createSlice({
@@ -79,6 +80,20 @@ export const UserSlice = createSlice({
         },
         setLastOrderDetails: (state: UserSliceSchema, action: PayloadAction<OrderInterface>) => {state.lastOrderDetails = action.payload},
         toggleMobileFilterOpen: (state: UserSliceSchema) => {state.isMobileFilterOpen = !state.isMobileFilterOpen}
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(loginByUsername.pending, (state) => {
+                state.loginError = undefined;
+                state.loginIsLoading = true;
+            })
+            .addCase(loginByUsername.fulfilled, (state) => {
+                state.loginIsLoading = false;
+            })
+            .addCase(loginByUsername.rejected, (state, action) => {
+                state.loginIsLoading = false;
+                state.loginError = action.payload;
+            });
     },
 });
 

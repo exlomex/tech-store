@@ -1,4 +1,3 @@
-import {MainPage} from "@/pages/MainPage";
 import {Suspense, useEffect, useState} from "react";
 import {useAppDispatch} from "@/hooks/useAppDispatch";
 import {UserSliceActions} from "@/store/reducers/UserSlice";

@@ -22,7 +22,9 @@ export interface UserSliceSchema {
     cartItems: cartItem[]
     activeCartCheckboxes: Record<number, boolean>;
     lastOrderDetails?: OrderInterface;
-    isMobileFilterOpen: boolean
+    isMobileFilterOpen: boolean;
+    loginError?: string;
+    loginIsLoading: boolean;
 }
 
 export interface tokenInfoTypes extends JwtPayload {
