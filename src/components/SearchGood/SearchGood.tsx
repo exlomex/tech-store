@@ -77,13 +77,6 @@ export const SearchGood = (props: SearchGoodProps) => {
                         onChange={onInputChange} value={queryValue}
                     />
 
-                    {/*TODO DELETE*/}
-                    {/*{searchIsFetching &&*/}
-                    {/*    <div className={cls.loaderWrapper}>*/}
-                    {/*        <span className={cls.loader}></span>*/}
-                    {/*    </div>*/}
-                    {/*}*/}
-
                 </div>
                 {debouncedQueryValue && isSearchOpen && <DropDownList items={searchData} isLoading={searchIsFetching}/>}
             </div>
