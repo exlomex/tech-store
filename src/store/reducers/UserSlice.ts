@@ -75,9 +75,21 @@ export const UserSlice = createSlice({
                 }, 0)
 
 
-            if (totalOfActiveCheckboxes === state.cartItems.length) {state.activeCartCheckboxes = []}
+            if (totalOfActiveCheckboxes === state.cartItems.length) {state.activeCartCheckboxes = {}}
             else {state.cartItems.forEach(cartItem => state.activeCartCheckboxes[cartItem.id] = true)}
         },
+        // toggleAllActiveCartCheckboxes: (state: UserSliceSchema) => {
+        //     const totalOfActiveCheckboxes = Object.values(state.activeCartCheckboxes).filter(Boolean).length;
+        //
+        //     if (totalOfActiveCheckboxes === state.cartItems.length) {
+        //         state.activeCartCheckboxes = {};
+        //     } else {
+        //         state.cartItems.forEach(cartItem => {
+        //             state.activeCartCheckboxes[cartItem.id] = true;
+        //         });
+        //     }
+        // },
+
         setLastOrderDetails: (state: UserSliceSchema, action: PayloadAction<OrderInterface>) => {state.lastOrderDetails = action.payload},
         toggleMobileFilterOpen: (state: UserSliceSchema) => {state.isMobileFilterOpen = !state.isMobileFilterOpen}
     },

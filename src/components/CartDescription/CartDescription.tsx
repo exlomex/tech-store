@@ -50,11 +50,10 @@ export const CartDescription = (props: CartDescriptionProps) => {
     }, [orderData]);
     const onPurchaseButtonClickHandler = async () => {
         try {
-            await createNewOrder({ids: activeCartCheckboxesArray})
+            await createNewOrder({ids: activeCartCheckboxesArray}).unwrap()
             navigate('/order')
         } catch (e) {
             console.error('Ошибка при создании заказа:', e);
-            throw new Error()
         }
     }
 
